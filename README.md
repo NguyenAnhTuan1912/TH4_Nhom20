@@ -1,4 +1,4 @@
-# TH4_Nhom20.
+# Bài thục hành buổi 4 - Nhóm 20.
 ## Một số lưu ý nhỏ về bài tập buổi 4.
 <p>Bài này tụi mình sẽ chia thành 3 database khác nhau (Để test tính năng), cho nên ở dòng cuối file .gitignore trong Project t có để 2 tên 2 file appsettings.json và appsettings.Development.json để không đẩy 2 thg này lên Github.</p>
 <ul>
