@@ -1,3 +1,22 @@
 ﻿@{
     ViewData["Title"] = "The Loai";
 }
+
+<h1 class="mb-4 mt-2 .text-primary">Thể loại/Tất cả</h1>
+<table>
+    <tr>
+        <th>Số thứ tự</th>
+        <th>Thể loại</th>
+        <th>Ngày tạo</th>
+    </tr>
+    @{
+        foreach(var category in @ViewBag.TheLoai) {
+            <tr>
+                <td>@category.Id</td>
+                <td>@category.Name</td>
+                <td>@category.DateCreated</td>
+            </tr>
+        }
+    }
+</table>
+<p class="text-primary"><a href="/">Trở về</a></p>

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using TH4_Nhom20.Models;
 
 namespace TH4_Nhom20.Data
 {
@@ -9,5 +10,6 @@ namespace TH4_Nhom20.Data
             : base(options)
         {
         }
+        public DbSet<TheLoaiModel> theLoai { get; set; }
     }
 }
