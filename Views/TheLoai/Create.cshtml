@@ -7,13 +7,15 @@
 @model TheLoaiModel
 <div class="container">
 	<h3>Thêm thể loại</h3>
-	<form method="post">
-		<label asp-for="Name">Tên thể loại</label>
-		<input  asp-for="Name" type="text" class="form-control"/>
-		
-		<label asp-for="DataCreated">Ngày tạo</label>
-		<input asp-for="DataCreated" type="date" class="form-control" />
-	
+	<form method="post" id="create-form" action="">
+		<article class="create-form__input-container">
+			<label asp-for="Name">Tên thể loại</label>
+			<input asp-for="Name" type="text" class="form-control" />
+		</article>
+		<article class="create-form__input-container">
+			<label asp-for="DateCreated">Ngày tạo</label>
+			<input asp-for="DateCreated" type="date" class="form-control" />
+		</article>
 		<button type="submit" class="btn btn-primary">Tạo mới</button>
 	</form>
 </div>

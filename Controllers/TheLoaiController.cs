@@ -21,7 +21,6 @@ namespace TH4_Nhom20.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-           
             return View();
         }
         [HttpPost]
