@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TH4_Nhom20.Data;
+using TH4_Nhom20.Data.Migrations;
+using TH4_Nhom20.Models;
 
 namespace TH4_Nhom20.Controllers
 {
@@ -13,7 +15,20 @@ namespace TH4_Nhom20.Controllers
         public IActionResult Index()
         {
             var theloai = _db.theLoai.ToList();
-            ViewBag.TheLoai = theloai;
+            ViewBag.theLoai = theloai;
+            return View();
+        }
+        [HttpGet]
+        public IActionResult Create()
+        {
+           
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Create(TheLoaiModel theLoai)
+        {
+            _db.theLoai.Add(theLoai);
+            _db.SaveChanges();
             return View();
         }
     }
