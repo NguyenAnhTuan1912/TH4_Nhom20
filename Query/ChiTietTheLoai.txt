@@ -1,0 +1,21 @@
+Kinh dị
+Hài hước
+Ma quỷ
+
+ID: 2
+NAME: Kinh dị
+DESCRIPTION: Kinh dị là một trong những đề tài luôn hấp dẫn tới thị hiếu của chúng ta. Những thứ kinh dị luôn cho mnang cho chúng ta cảm giác sợ hãi và phấn khích. Những cảm giác trên lại còn tuyệt vời hơn nữa trong các bộ phim kinh dị, chúng ta có cảm giác như được sống cùng với các nhân vật trong phim ở cùng bối cảnh đó, đẩy cao sự thích thú và hưng phấn cùng với nỗi sợ hãi và lo lắng tột độ.
+AMOUNTFILM: 23
+DATECREATED: 12/11/2019
+
+ID: 1
+NAME: Hài hước
+DESCRIPTION: Sẽ ra sao nếu những tình huống trớ trêu hay hài hước được ghi hình lại một cách chuyên nghiệp? Những bộ phim hài hước sẽ mang lại những điều đó cho chúng ta. Cùng sống trong những giờ phút giải trí, vui nhộn cùng với các nhân vật trong phim và tận hưởng niềm vui bên ngoài đời sống thật.
+AMOUNTFILM: 22
+DATECREATED: 19/12/2022
+
+ID: 3
+NAME: Ma quái
+DESCRIPTION: Tâm linh luôn là một đề tài bí ẩn và thu hút, nhưng người ta rất hạn chế tiếp xúc đến tâm linh vì không muốn gặp những điều chẳng lành. Những bộ phim kinh dị mang đến cho chúng ta một cái nhìn tổng quát hơn về tâm linh, và đào sâu vào tận nỗi sợ của con người. Sợ hãi, lo lắng, bồn chồn và ngột ngạt.
+AMOUNTFILM: 41
+DATECREATED: 19/05/2021

@@ -12,8 +12,8 @@ using TH4_Nhom20.Data;
 namespace TH4_Nhom20.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220906094342_TheLoaiMigration")]
-    partial class TheLoaiMigration
+    [Migration("20220915144332_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -226,6 +226,31 @@ namespace TH4_Nhom20.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("TH4_Nhom20.Models.ChiTietTheLoaiModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("AmountFilm")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("CHITIETTHELOAI");
+                });
+
             modelBuilder.Entity("TH4_Nhom20.Models.TheLoaiModel", b =>
                 {
                     b.Property<int>("Id")
@@ -243,7 +268,7 @@ namespace TH4_Nhom20.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("theLoai");
+                    b.ToTable("THELOAI");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -295,6 +320,17 @@ namespace TH4_Nhom20.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("TH4_Nhom20.Models.ChiTietTheLoaiModel", b =>
+                {
+                    b.HasOne("TH4_Nhom20.Models.TheLoaiModel", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
                 });
 #pragma warning restore 612, 618
         }

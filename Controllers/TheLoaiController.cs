@@ -14,8 +14,8 @@ namespace TH4_Nhom20.Controllers
         }
         public IActionResult Index()
         {
-            var theloai = _db.theLoai.ToList();
-            ViewBag.theLoai = theloai;
+            var theloai = _db.THELOAI.ToList();
+            ViewBag.TheLoai = theloai;
             return View();
         }
         // Create
@@ -27,7 +27,7 @@ namespace TH4_Nhom20.Controllers
         [HttpPost]
         public IActionResult Create(TheLoaiModel theLoai)
         {
-            _db.theLoai.Add(theLoai);
+            _db.THELOAI.Add(theLoai);
             _db.SaveChanges();
             return View();
         }
@@ -48,11 +48,29 @@ namespace TH4_Nhom20.Controllers
         {
             if(ModelState.IsValid)
             {
-                _db.theLoai.Update(theLoai);
+                _db.THELOAI.Update(theLoai);
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }
             
+            return View();
+        }
+
+        // Details
+        [HttpGet]
+        public IActionResult Details(int id)
+        {
+            var chiTiet = (from ChiTiet in _db.CHITIETTHELOAI
+                           join TheLoai in _db.THELOAI on ChiTiet.Category.Id equals TheLoai.Id
+                           where TheLoai.Id == id
+                           select new
+                           {
+                               Name = TheLoai.Name,
+                               Description = ChiTiet.Description,
+                               DateCreate = TheLoai.DateCreated
+                           }
+                           ).ToList();
+            ViewBag.ChiTiet = chiTiet[0];
             return View();
         }
     }

@@ -26,6 +26,14 @@
                     >
                     Chỉnh sửa
                     </a>
+                    |
+                    <a 
+                        asp-controller="TheLoai"
+                        asp-action="Details"
+                        asp-route-id=@category.Id
+                    >
+                    Chi tiết
+                    </a>
                 </td>
             </tr>
         }
