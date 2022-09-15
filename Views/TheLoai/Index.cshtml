@@ -8,6 +8,7 @@
         <th>Số thứ tự</th>
         <th>Thể loại</th>
         <th>Ngày tạo</th>
+        <th>Chức năng</th>
     </tr>
     @{
         foreach(var category in @ViewBag.TheLoai) {
@@ -15,8 +16,19 @@
                 <td>@category.Id</td>
                 <td>@category.Name</td>
                 <td>@category.DateCreated</td>
+                <td>
+                    <a
+                        asp-controller="TheLoai"
+                        asp-action="Edit"
+                        asp-route-id=@category.Id
+                        asp-route-name=@category.Name
+                        asp-route-datecreated=@category.DateCreated
+                    >
+                    Chỉnh sửa
+                    </a>
+                </td>
             </tr>
         }
     }
 </table>
-<p class="text-primary"><a href="/">Trở về</a></p>
+<partial name="~/Views/Shared/_TheLoaiActionPartial.cshtml" />

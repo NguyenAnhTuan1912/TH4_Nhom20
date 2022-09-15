@@ -36,3 +36,20 @@ tr:nth-child(even) {
 .create-form__input-container {
     margin-bottom: 25px;
 }
+
+.feature {
+    display: flex;
+    margin-top: 25px;
+}
+
+.feature p {
+    margin: 0 25px;
+}
+
+.feature p:last-of-type {
+    margin-right: 0;
+}
+
+.feature p:first-of-type {
+    margin-left: 0;
+}

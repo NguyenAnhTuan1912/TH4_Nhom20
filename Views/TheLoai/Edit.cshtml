@@ -1,0 +1,31 @@
+﻿@model TheLoaiModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>@ViewData["Title"]</h1>
+<div class="container">
+	<h3>Sửa thể loại</h3>
+	<form method="post" id="edit-form" action="">
+		<div asp-validation-summary="All" class="text-danger"></div>
+		<article class="create-form__input-container">
+			<label asp-for="Name">Tên thể loại</label>
+			<p><span class="text-primary">Old Name: </span>@Model.Name</p>
+			<input asp-for="Name" type="text" class="form-control" value="" />
+			<span asp-validation-for="Name" class="text-danger"></span>
+		</article>
+		<article class="create-form__input-container">
+			<label asp-for="DateCreated">Ngày tạo</label>
+			<p><span class="text-primary">Old Date: </span>@Model.DateCreated.ToString("MM/dd/yyyy")</p>
+			<input asp-for="DateCreated" type="date" class="form-control" value=""  />
+			<span asp-validation-for="DateCreated" class="text-danger"></span>
+		</article>
+		<button type="submit" class="btn btn-primary">Sửa</button>
+	</form>
+</div>
+<partial name="~/Views/Shared/_TheLoaiActionPartial.cshtml" />
+@section Scripts {
+	@{
+		<partial name="~/Views/Shared/_ValidationScriptsPartial.cshtml" />
+	}
+}
