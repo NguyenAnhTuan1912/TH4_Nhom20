@@ -32,6 +32,16 @@ INNER JOIN CHITIETTHELOAI ON CHITIETTHELOAI.CategoryId = THELOAI.Id
 -- Drop Table
 DROP TABLE THELOAI
 DROP TABLE CHITIETTHELOAI
+
+-- Xoá dữ liệu
+DECLARE @id as SMALLINT = 9
+DELETE FROM THELOAI WHERE Id = @id
+DELETE FROM CHITIETTHELOAI WHERE Id = @id
+
+-- Cập nhật lại Id cho table
+DECLARE @id as SMALLINT = 7
+DBCC CHECKIDENT ('THELOAI', RESEED, @id)
+DBCC CHECKIDENT ('CHITIETTHELOAI', RESEED, @id)
 -----------------
 
 -- Sau khi USE PHIM thì insert dữ liệu, lúc đó mới có dữ liệu để mà in ra màn hình.

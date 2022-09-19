@@ -49,3 +49,13 @@ td, th {
 .feature p:first-of-type {
     margin-left: 0;
 }
+
+.description-field {
+    width: 100%;
+    min-height: 320px;
+    padding: .375rem .75rem;
+    resize: vertical;
+    outline: none;
+    border: 1px solid rgba(0, 0, 0, .125);
+    border-radius: .25rem;
+}
