@@ -2,6 +2,7 @@
 using TH4_Nhom20.Data;
 using TH4_Nhom20.Data.Migrations;
 using TH4_Nhom20.Models;
+using static System.Collections.Specialized.BitVector32;
 
 namespace TH4_Nhom20.Controllers
 {
@@ -27,6 +28,12 @@ namespace TH4_Nhom20.Controllers
         [HttpPost]
         public IActionResult Create(TheLoaiModel theLoai)
         {
+            /*TheLoaiModel theloai = new TheLoaiModel
+            {
+                Name = chiTiet.Name,
+                DateCreated = chiTiet.DateCreated
+            };
+            return View();*/
             _db.THELOAI.Add(theLoai);
             _db.SaveChanges();
             return View();
@@ -73,5 +80,7 @@ namespace TH4_Nhom20.Controllers
             ViewBag.ChiTiet = chiTiet[0];
             return View();
         }
+        
     }
+   
 }
