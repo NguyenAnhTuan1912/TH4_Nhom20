@@ -7,3 +7,27 @@
 </ul>
 <p>Trong file Query\TH4_SQLServer_Query.sql có một số câu lệnh insert dùng để thêm vào trong Database các dữ liệu cần để test. Một số câu lệnh Select.</p>
 <h3>Nhớ đọc kĩ, có gì không hiểu thì hỏi.</h3>
+
+# UPĐATE: từ giờ bài thực hành buổi 4 sẽ nâng cấp thành bài thực hành buổi 6
+<p>Bài thực hành buổi 4 là sự chuẩn bị (các chức năng, khái niệm về kết nối db) cho bài thực hành này.</p>
+<h2>A. Một số thay đổi nhỏ như sau: </h2>
+<ol>
+  <li>Thay đổi lại mẫu dữ liệu của database và cũng như trong c#, cụ thể như sau:
+    <ul>
+      <li>THELOAI thành BRAND</li>
+      <li>CHITIETTHELOAI thành CAMERA</li>
+      <li>TheLoaiModel thành BrandModel</li>
+      <li>ChiTietTheLoaiModel thành CameraModel</li>
+      <li>ChiTietTheLoaiViewModel thành CameraDetailsViewModel</li>
+    </ul>
+  </li>
+  <li>Thay đổi hành vi của một số Action trong Controller. Sửa lại chức năng Delele.</li>
+  <li>Thay đổi View.</li>
+  <li>Không in danh sách các thể loại nữa, thay vào đó sẽ in ra danh sách các máy ảnh.</li>
+</ol>
+<h2>B. Một số tính năng mới sẽ thêm trong tương tai: (Yêu cầu của bài thực hành 6)</h2>
+<ol>
+  <li>Phân quyền User, bao gồm: Admin và Customer</li>
+  <li>Khi tạo thêm thông tin cho một máy ảnh mới, thì có chức năng tải ảnh lên Server.</li>
+  <li>Hiện ra các modal box thông báo khi thực hiện một chức năng nào đó (Tạo, xoá, sửa).</li>
+</ol>
