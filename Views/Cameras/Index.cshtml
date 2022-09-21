@@ -6,24 +6,25 @@
 <table>
     <tr>
         <th>Số thứ tự</th>
-        <th>Thể loại</th>
-        <th>Ngày tạo</th>
+        <th>Tên máy</th>
+        <th>Tên hãng</th>
+        <th>Loại máy</th>
         <th>Chức năng</th>
     </tr>
     @{
         int index = 1;
-        foreach(var category in @ViewBag.TheLoai) {
+        foreach (var camera in @ViewBag.Cameras)
+        {
             <tr>
                 <td>@index</td>
-                <td>@category.Name</td>
-                <td>@category.DateCreated</td>
+                <td>@camera.Name</td>
+                <td>@camera.Brand.Name</td>
+                <td>@camera.Category</td>
                 <td>
                     <a
                         asp-controller="TheLoai"
                         asp-action="Edit"
-                        asp-route-id=@category.Id
-                        asp-route-name=@category.Name
-                        asp-route-datecreated=@category.DateCreated
+                        asp-route-id=@camera.Id
                     >
                     Chỉnh sửa
                     </a>
@@ -31,16 +32,14 @@
                     <a 
                         asp-controller="TheLoai"
                         asp-action="Details"
-                        asp-route-id=@category.Id
-                    >
+                        asp-route-id=@camera.Id>
                     Chi tiết
                     </a>
                     |
                     <a 
                         asp-controller="TheLoai"
                         asp-action="Delete"
-                        asp-route-id=@category.Id
-                    >
+                        asp-route-id=@camera.Id>
                     Xoá
                     </a>
                     
@@ -50,4 +49,4 @@
         }
     }
 </table>
-<partial name="~/Views/Shared/_TheLoaiActionPartial.cshtml" />
+<partial name="~/Views/Shared/_CameraActionPartial.cshtml" />

@@ -10,7 +10,7 @@ namespace TH4_Nhom20.Data
             : base(options)
         {
         }
-        public DbSet<TheLoaiModel> THELOAI { get; set; }
-        public DbSet<ChiTietTheLoaiModel> CHITIETTHELOAI { get; set; }
+        public DbSet<BrandModel> BRAND { get; set; }
+        public DbSet<CameraModel> CAMERA { get; set; }
     }
 }

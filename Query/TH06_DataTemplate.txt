@@ -1,0 +1,18 @@
+Lấy những nội dung như sau, lấy ít nhất 10 sản phẩm.
+Chỉ lấy 3 hãng sau: Canon, Nikon, Sony
+- Tên máy
+- Giá
+- Số lượng
+- Thông số kĩ thuật
+- Giới thiệu sản phẩm
+- 2 tấm ảnh (lấy sản phầm nào có 2 chụp 2 mặt trước và sau).
+
+Tổ chức folder image như sau:
+images
+  canond7
+    front.jpg
+    back.jpg
+  canond60d
+    front.jpg
+    back.jpg
+

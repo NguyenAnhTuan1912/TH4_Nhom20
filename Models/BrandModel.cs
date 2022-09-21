@@ -2,11 +2,11 @@
 
 namespace TH4_Nhom20.Models
 {
-    public class TheLoaiModel
+    public class BrandModel
     {
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
-        public DateTime DateCreated { get; set; } = DateTime.Now;
+        public string Categories { get; set; }
     }
 }

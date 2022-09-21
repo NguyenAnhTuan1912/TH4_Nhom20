@@ -12,7 +12,7 @@ using TH4_Nhom20.Data;
 namespace TH4_Nhom20.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220915144332_Init")]
+    [Migration("20220921034544_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -226,7 +226,7 @@ namespace TH4_Nhom20.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("TH4_Nhom20.Models.ChiTietTheLoaiModel", b =>
+            modelBuilder.Entity("TH4_Nhom20.Models.BrandModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -234,33 +234,9 @@ namespace TH4_Nhom20.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("AmountFilm")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
+                    b.Property<string>("Categories")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
-
-                    b.ToTable("CHITIETTHELOAI");
-                });
-
-            modelBuilder.Entity("TH4_Nhom20.Models.TheLoaiModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -268,7 +244,49 @@ namespace TH4_Nhom20.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("THELOAI");
+                    b.ToTable("BRAND");
+                });
+
+            modelBuilder.Entity("TH4_Nhom20.Models.CameraModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Category")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Features")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageUrls")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Introduction")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Price")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("CAMERA");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -322,15 +340,15 @@ namespace TH4_Nhom20.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("TH4_Nhom20.Models.ChiTietTheLoaiModel", b =>
+            modelBuilder.Entity("TH4_Nhom20.Models.CameraModel", b =>
                 {
-                    b.HasOne("TH4_Nhom20.Models.TheLoaiModel", "Category")
+                    b.HasOne("TH4_Nhom20.Models.BrandModel", "Brand")
                         .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Category");
+                    b.Navigation("Brand");
                 });
 #pragma warning restore 612, 618
         }

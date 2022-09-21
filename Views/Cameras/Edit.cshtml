@@ -1,0 +1,50 @@
+﻿@model CameraDetailsViewModel;
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>@ViewData["Title"]</h1>
+<div class="container">
+	<h3>Sửa thông tin máy</h3>
+	<form method="post" id="edit-form" action="">
+		<div asp-validation-summary="All" class="text-danger"></div>
+		<article class="create-form__input-container">
+			<label asp-for="CameraName">Tên máy</label>
+			<input asp-for="CameraName" type="text" class="form-control" />
+			<span asp-validation-for="CameraName" class="text-danger"></span>
+		</article>
+		<article class="create-form__input-container">
+			<label asp-for="CameraPrice">Giá bán</label>
+			<input asp-for="CameraPrice" type="text" class="form-control" />
+			<span asp-validation-for="CameraPrice" class="text-danger"></span>
+		</article>
+		<article class="create-form__input-container">
+			<label asp-for="CameraFeatures">Tính năng của máy</label>
+			<textarea asp-for="CameraFeatures" class="description-field"></textarea>
+			<span asp-validation-for="CameraFeatures" class="text-danger"></span>
+		</article>
+		<article class="create-form__input-container">
+			<label asp-for="CameraIntroduction">Giới thiệu thiết bị</label>
+			<textarea asp-for="CameraIntroduction" class="description-field"></textarea>
+			<span asp-validation-for="CameraIntroduction" class="text-danger"></span>
+		</article>
+		<article class="create-form__input-container">
+			<label asp-for="BrandName">Hãng</label>
+			<select asp-for="BrandName" asp-items=@ViewBag.BrandName class="form-control">
+				<option>Chọn tên hãng</option>
+			</select>
+			<div class="verticle-space"></div>
+			<label asp-for="Category">Loại máy ảnh</label>
+			<select asp-for="Category" asp-items=@ViewBag.Categories class="form-control">
+				<option>Chọn loại</option>
+			</select>
+		</article>
+		<button type="submit" class="btn btn-primary">Tạo mới</button>
+	</form>
+</div>
+<partial name="~/Views/Shared/_TheLoaiActionPartial.cshtml" />
+@section Scripts {
+	@{
+	<partial name="~/Views/Shared/_ValidationScriptsPartial.cshtml" />
+	}
+}

@@ -1,0 +1,13 @@
+Các hãng máy ảnh
+
+Id: 1
+Name: Canon
+Categories: Compact;DSLR;Mirrorless
+
+Id: 2
+Name: Nikon
+Categories: Compact;DSLR;Mirrorless
+
+Id: 3
+Name: Sony
+Categories: Compact;DSLR;Mirrorless

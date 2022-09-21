@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -10,53 +9,57 @@ namespace TH4_Nhom20.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "THELOAI",
+                name: "BRAND",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Categories = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_THELOAI", x => x.Id);
+                    table.PrimaryKey("PK_BRAND", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "CHITIETTHELOAI",
+                name: "CAMERA",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AmountFilm = table.Column<int>(type: "int", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Category = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Price = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Features = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Introduction = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ImageUrls = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CHITIETTHELOAI", x => x.Id);
+                    table.PrimaryKey("PK_CAMERA", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CHITIETTHELOAI_THELOAI_CategoryId",
+                        name: "FK_CAMERA_BRAND_CategoryId",
                         column: x => x.CategoryId,
-                        principalTable: "THELOAI",
+                        principalTable: "BRAND",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_CHITIETTHELOAI_CategoryId",
-                table: "CHITIETTHELOAI",
+                name: "IX_CAMERA_CategoryId",
+                table: "CAMERA",
                 column: "CategoryId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "CHITIETTHELOAI");
+                name: "CAMERA");
 
             migrationBuilder.DropTable(
-                name: "THELOAI");
+                name: "BRAND");
         }
     }
 }
