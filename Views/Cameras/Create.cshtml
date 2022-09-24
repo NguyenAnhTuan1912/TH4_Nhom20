@@ -6,7 +6,7 @@
 <h1>@ViewData["Title"]</h1>
 <div class="container">
 	<h3>Thêm máy ảnh mới</h3>
-	<form method="post" id="create-form" action="">
+	<form method="post" id="create-form" action="" enctype="multipart/form-data">
 		<div asp-validation-summary="All" class="text-danger"></div>
 		<article class="create-form__input-container">
 			<label asp-for="CameraName">Tên máy</label>
@@ -29,15 +29,23 @@
 			<span asp-validation-for="CameraIntroduction" class="text-danger"></span>
 		</article>
 		<article class="create-form__input-container">
-			<label asp-for="BrandName">Hãng</label>
-			<select asp-for="BrandName" asp-items=@ViewBag.BrandName class="form-control">
+			<label asp-for="BrandId">Hãng</label>
+			<select asp-for="BrandId" asp-items="@ViewBag.BrandNames" class="form-control">
 				<option>Chọn tên hãng</option>
 			</select>
 			<div class="verticle-space"></div>
 			<label asp-for="Category">Loại máy ảnh</label>
-			<select asp-for="Category" asp-items=@ViewBag.Categories class="form-control">
+			<select
+				asp-for="Category"
+					asp-items=@(ViewBag.CategoryNamesOfEachBrand)
+				class="form-control">
 				<option>Chọn loại</option>
 			</select>
+		</article>
+		<article class="create-form__input-container">
+			<label asp-for="ImageFile">Hình ảnh</label>
+			<input asp-for="ImageFile" type="file" accept="image/*" />
+			<span asp-validation-for="ImageFile" class="text-danger"></span>
 		</article>
 		<button type="submit" class="btn btn-primary">Tạo mới</button>
 	</form>

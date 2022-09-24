@@ -12,5 +12,6 @@ namespace TH4_Nhom20.Data
         }
         public DbSet<BrandModel> BRAND { get; set; }
         public DbSet<CameraModel> CAMERA { get; set; }
+        public DbSet<ImageModel> IMAGE { get; set; }
     }
 }

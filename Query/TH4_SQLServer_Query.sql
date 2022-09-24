@@ -20,10 +20,14 @@ USE CAMERA
 SELECT * FROM BRAND
 -- MỚI: xem tất cả dữ liệu trong Table CAMERA
 SELECT * FROM CAMERA
+SELECT * FROM IMAGE
 
--- MỚI: xem tất chi tiết tất cả các thể loại
+-- Xem tất chi tiết tất cả các thể loại
 SELECT BRAND.Id, BRAND.Name, CAMERA.Description, BRAND.DateCreated FROM BRAND
 INNER JOIN CAMERA ON CAMERA.CategoryId = BRAND.Id
+
+-- MỚI: Reset ID tự động về 1
+TRUNCATE TABLE CAMERA DBCC CHECKIDENT ('[CAMERA]', RESEED, 1)
 
 -- Sau khi USE PHIM thì insert dữ liệu, lúc đó mới có dữ liệu để mà in ra màn hình.
 -- Insert một số dữ liệu.
@@ -51,9 +55,10 @@ DROP TABLE BRAND
 DROP TABLE CAMERA
 
 -- Xoá dữ liệu
-DECLARE @id as SMALLINT = 9
-DELETE FROM BRAND WHERE Id = @id
+DECLARE @id as SMALLINT = 4
+DELETE FROM IMAGE WHERE Id = @id
 DELETE FROM CAMERA WHERE Id = @id
+DELETE FROM BRAND WHERE Id = @id
 
 -- Cập nhật lại Id cho table
 DECLARE @id as SMALLINT = 7

@@ -12,8 +12,8 @@ using TH4_Nhom20.Data;
 namespace TH4_Nhom20.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220921034544_Init")]
-    partial class Init
+    [Migration("20220924030520_Camera03")]
+    partial class Camera03
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -255,16 +255,23 @@ namespace TH4_Nhom20.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int>("BrandId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("BrandName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Category")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Features")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ImageId")
+                        .HasColumnType("int");
 
                     b.Property<string>("ImageUrls")
                         .IsRequired()
@@ -284,9 +291,28 @@ namespace TH4_Nhom20.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId");
+                    b.HasIndex("BrandId");
+
+                    b.HasIndex("ImageId");
 
                     b.ToTable("CAMERA");
+                });
+
+            modelBuilder.Entity("TH4_Nhom20.Models.ImageModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("IMAGE");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -344,11 +370,19 @@ namespace TH4_Nhom20.Data.Migrations
                 {
                     b.HasOne("TH4_Nhom20.Models.BrandModel", "Brand")
                         .WithMany()
-                        .HasForeignKey("CategoryId")
+                        .HasForeignKey("BrandId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TH4_Nhom20.Models.ImageModel", "Image")
+                        .WithMany()
+                        .HasForeignKey("ImageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Brand");
+
+                    b.Navigation("Image");
                 });
 #pragma warning restore 612, 618
         }

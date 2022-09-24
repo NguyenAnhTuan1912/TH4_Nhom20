@@ -63,3 +63,8 @@ td, th {
 .verticle-space {
     margin-bottom: 25px;
 }
+
+.details-image, .details-image img {
+    width: 200px;
+    height: 260px;
+}

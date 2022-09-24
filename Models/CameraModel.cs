@@ -7,8 +7,12 @@ namespace TH4_Nhom20.Models
     {
         [Key]
         public int Id { get; set; }
-        [ForeignKey("CategoryId")]
+        [ForeignKey("BrandId")]
+        [Required]
         public BrandModel Brand { get; set; }
+        public string BrandName { get; set; }
+        [ForeignKey("ImageId")]
+        public ImageModel Image { get; set; }
         [Required]
         public string Name { get; set; }
         public string Category { get; set; }

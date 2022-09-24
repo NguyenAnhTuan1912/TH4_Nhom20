@@ -6,16 +6,17 @@
 <h1>@ViewData["Title"]</h1>
 <div class="container">
 	<h3>Sửa thông tin máy</h3>
-	<form method="post" id="edit-form" action="">
+	<form method="post" id="edit-form" action="" enctype="multipart/form-data">
 		<div asp-validation-summary="All" class="text-danger"></div>
 		<article class="create-form__input-container">
 			<label asp-for="CameraName">Tên máy</label>
-			<input asp-for="CameraName" type="text" class="form-control" />
+			<input asp-for="CameraName" type="text" class="form-control" value=@ViewBag.ChiTiet.CameraName />
+			<input asp-for="CameraId" type="hidden" value=@ViewBag.ChiTiet.CameraId />
 			<span asp-validation-for="CameraName" class="text-danger"></span>
 		</article>
 		<article class="create-form__input-container">
 			<label asp-for="CameraPrice">Giá bán</label>
-			<input asp-for="CameraPrice" type="text" class="form-control" />
+			<input asp-for="CameraPrice" type="text" class="form-control" value=@ViewBag.ChiTiet.CameraPrice />
 			<span asp-validation-for="CameraPrice" class="text-danger"></span>
 		</article>
 		<article class="create-form__input-container">
@@ -29,22 +30,52 @@
 			<span asp-validation-for="CameraIntroduction" class="text-danger"></span>
 		</article>
 		<article class="create-form__input-container">
-			<label asp-for="BrandName">Hãng</label>
-			<select asp-for="BrandName" asp-items=@ViewBag.BrandName class="form-control">
+			<label asp-for="BrandId">Hãng</label>
+			<select asp-for="BrandId" asp-items=@ViewBag.BrandNames class="form-control">
 				<option>Chọn tên hãng</option>
 			</select>
 			<div class="verticle-space"></div>
 			<label asp-for="Category">Loại máy ảnh</label>
-			<select asp-for="Category" asp-items=@ViewBag.Categories class="form-control">
+			<select asp-for="Category" asp-items=@ViewBag.CategoryNamesOfEachBrand class="form-control">
 				<option>Chọn loại</option>
 			</select>
+		</article>
+		<div class="details-image">
+			<img src="@ViewBag.ChiTiet.ImageUrls" />
+		</div>
+		<article class="create-form__input-container">
+			<label asp-for="ImageFile">Hình ảnh</label>
+			<input asp-for="ImageFile" type="file" accept="image/*" />
+			<input asp-for="OldImageUrls" type="hidden" value=@ViewBag.ChiTiet.ImageUrls />
+			<span asp-validation-for="ImageFile" class="text-danger"></span>
 		</article>
 		<button type="submit" class="btn btn-primary">Tạo mới</button>
 	</form>
 </div>
-<partial name="~/Views/Shared/_TheLoaiActionPartial.cshtml" />
+<partial name="~/Views/Shared/_CameraActionPartial.cshtml" />
 @section Scripts {
 	@{
 	<partial name="~/Views/Shared/_ValidationScriptsPartial.cshtml" />
 	}
+	<script>
+		const HTML_ENTITIES = {
+			'&#xD;': '\r',
+			'&#xA;': '\n',
+			'&apos;': '\'',
+			'&quot;': '"'
+		};
+		const featuresTextArea = document.getElementById('CameraFeatures');
+		const introductionTextArea = document.getElementById('CameraIntroduction');
+		const htmlCodeTextAreaToRegExp = /(&#xD;)|(&#xA;)|(&apos;)|(&quot;)/g;
+		const featuresTextAreaValue = "@ViewBag.ChiTiet.CameraFeatures".replace(htmlCodeTextAreaToRegExp, (match) => {
+			return HTML_ENTITIES[match];
+		});
+		const introductionTextAreaValue = "@ViewBag.ChiTiet.CameraIntroduction".replace(htmlCodeTextAreaToRegExp, (match) => {
+			return HTML_ENTITIES[match];
+		});
+		featuresTextArea.value = featuresTextAreaValue;
+		introductionTextArea.value = introductionTextAreaValue;
+		document.getElementById('BrandId').value = "@ViewBag.ChiTiet.BrandId";
+		document.getElementById('Category').value = "@ViewBag.ChiTiet.Category";
+	</script>
 }
