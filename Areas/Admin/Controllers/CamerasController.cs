@@ -11,6 +11,7 @@ using static System.Collections.Specialized.BitVector32;
 
 namespace TH4_Nhom20.Controllers
 {
+    [Area("Admin")]
     public class CamerasController : Controller
     {
         private readonly ApplicationDbContext _db;
@@ -47,6 +48,8 @@ namespace TH4_Nhom20.Controllers
             return View();
         }
         [HttpPost]
+        [DisableRequestSizeLimit, RequestFormLimits(MultipartBodyLengthLimit = int.MaxValue,
+        ValueLengthLimit = int.MaxValue)]
         public async Task<IActionResult> Create(CameraDetailsViewModel chiTietMayAnh)
         {
             if (ModelState.IsValid)
@@ -136,6 +139,8 @@ namespace TH4_Nhom20.Controllers
             return View();
         }
         [HttpPost]
+        [DisableRequestSizeLimit, RequestFormLimits(MultipartBodyLengthLimit = int.MaxValue,
+        ValueLengthLimit = int.MaxValue)]
         public async Task<IActionResult> Edit(CameraDetailsViewModel chiTietMayAnh)
         {
             if(ModelState.IsValid)

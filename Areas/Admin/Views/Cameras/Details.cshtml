@@ -10,7 +10,7 @@
         <span><strong>Hãng:&nbsp;&nbsp;</strong>@ViewBag.ChiTiet.BrandName</span>
         <span><strong>Loại:&nbsp;&nbsp;</strong>@ViewBag.ChiTiet.Category</span>
     </p>
-    <h3><strong>Gía:&nbsp;&nbsp;</strong>@ViewBag.ChiTiet.CameraPrice</h3>
+    <h3><strong>Giá:&nbsp;&nbsp;</strong>@ViewBag.ChiTiet.CameraPrice</h3>
     <ul>
         @foreach(string feature in features) {
             <li>@feature</li>
@@ -21,4 +21,4 @@
         <img src="@ViewBag.ChiTiet.ImageUrls" />
     </div>
 </div>
-<a asp-controller="Cameras" asp-action="">Trở về</a>
+<a asp-controller="Home" asp-action="">Trở về</a>

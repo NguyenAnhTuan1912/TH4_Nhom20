@@ -21,12 +21,12 @@
 		</article>
 		<article class="create-form__input-container">
 			<label asp-for="CameraFeatures">Tính năng của máy</label>
-			<textarea asp-for="CameraFeatures" class="description-field"></textarea>
+			@(Html.Raw("<textarea id=\"CameraFeatures\" name=\"CameraFeatures\" class=\"description-field\">"))@ViewBag.ChiTiet.CameraFeatures@(Html.Raw("</textarea>"))
 			<span asp-validation-for="CameraFeatures" class="text-danger"></span>
 		</article>
 		<article class="create-form__input-container">
 			<label asp-for="CameraIntroduction">Giới thiệu thiết bị</label>
-			<textarea asp-for="CameraIntroduction" class="description-field"></textarea>
+			@(Html.Raw("<textarea id=\"CameraIntroduction\" name=\"CameraIntroduction\" class=\"description-field\">"))@ViewBag.ChiTiet.CameraIntroduction@(Html.Raw("</textarea>"))
 			<span asp-validation-for="CameraIntroduction" class="text-danger"></span>
 		</article>
 		<article class="create-form__input-container">
@@ -58,6 +58,7 @@
 	<partial name="~/Views/Shared/_ValidationScriptsPartial.cshtml" />
 	}
 	<script>
+		/*
 		const HTML_ENTITIES = {
 			'&#xD;': '\r',
 			'&#xA;': '\n',
@@ -75,7 +76,9 @@
 		});
 		featuresTextArea.value = featuresTextAreaValue;
 		introductionTextArea.value = introductionTextAreaValue;
-		document.getElementById('BrandId').value = "@ViewBag.ChiTiet.BrandId";
+		*/
+		document.getElementById('BrandId').value = @ViewBag.ChiTiet.BrandId;
+		console.log("@ViewBag.ChiTiet.Category");
 		document.getElementById('Category').value = "@ViewBag.ChiTiet.Category";
 	</script>
 }

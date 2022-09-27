@@ -4,6 +4,7 @@ using TH4_Nhom20.Models;
 
 namespace TH4_Nhom20.Controllers
 {
+    [Area("User")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

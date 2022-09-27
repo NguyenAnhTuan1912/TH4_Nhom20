@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Xml.Linq;
@@ -27,8 +28,8 @@ namespace TH4_Nhom20.Models
         [Display(Name = "Giời thiệu về thiết bị")]
         public string CameraIntroduction { get; set; }
         [Display(Name = "Tải ảnh lên")]
-        [ValidateNever]
         [NotMapped]
+        [ValidateNever]
         public IFormFile ImageFile { get; set; }
         [ValidateNever]
         public string OldImageUrls { get; set; }

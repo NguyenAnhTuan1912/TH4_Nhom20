@@ -1,0 +1,40 @@
+﻿@{
+	ViewData["Title"] = "View All";
+}
+
+<h1>View All Cameras</h1>
+<div class="container py-5">
+    <div class="row text-center text-white mb-5">
+        <div class="col-lg-7 mx-auto text-black">
+            <h1 class="display-4">Product List</h1>
+        </div>
+    </div>
+    <div class="row product-item">
+        <div class="col-lg-8 mx-auto">
+            <!-- List group-->
+            <ul class="list-group shadow">
+                @foreach (var item in @ViewBag.Cameras)
+                {
+                    <li class="list-group-item">
+                        <!-- Custom content-->
+                        <div class="media align-items-lg-center flex-column flex-lg-row p-3">
+                            <div class="media-body order-2 order-lg-1">
+                                <h5 class="mt-0 font-weight-bold mb-2">@item.Name</h5>
+                                <p>Key features</p>
+                                <ul>
+                                    @for(int i = 0; i < 3; i++)
+                                    {
+                                        <li>@item.Features.Split(";")[i]</li>
+                                    }
+                                </ul>
+                                <div class="d-flex align-items-center justify-content-between mt-1">
+                                    <h6 class="font-weight-bold my-2">@item.Price đ</h6>
+                                </div>
+                            </div><img src="@item.ImageUrls" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
+                        </div> <!-- End -->
+                    </li> <!-- End -->
+                }
+            </ul> <!-- End -->
+        </div>
+    </div>
+</div>

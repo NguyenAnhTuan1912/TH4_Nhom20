@@ -65,6 +65,14 @@ td, th {
 }
 
 .details-image, .details-image img {
-    width: 200px;
-    height: 260px;
+    width: 400px;
+    height: 300px;
+}
+
+ul li {
+    list-style-position: inside;
+}
+
+.product-item p {
+    margin-bottom: 0px;
 }
