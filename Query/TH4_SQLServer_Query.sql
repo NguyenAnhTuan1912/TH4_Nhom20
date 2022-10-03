@@ -27,7 +27,9 @@ SELECT BRAND.Id, BRAND.Name, CAMERA.Description, BRAND.DateCreated FROM BRAND
 INNER JOIN CAMERA ON CAMERA.CategoryId = BRAND.Id
 
 -- MỚI: Reset ID tự động về 1
-TRUNCATE TABLE CAMERA DBCC CHECKIDENT ('[CAMERA]', RESEED, 1)
+DECLARE @name as varchar(30) = 'IMAGE'
+PRINT @name
+TRUNCATE TABLE CAMERA DBCC CHECKIDENT (@name, RESEED, 1)
 
 -- Sau khi USE PHIM thì insert dữ liệu, lúc đó mới có dữ liệu để mà in ra màn hình.
 -- Insert một số dữ liệu.

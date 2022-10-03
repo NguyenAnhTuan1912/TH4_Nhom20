@@ -1,24 +1,32 @@
 ﻿@{
     ViewData["Title"] = ViewBag.ChiTiet.CameraName;
-    string[] features = ViewBag.ChiTiet.CameraFeatures.Split(';');
+    string[] features = ViewBag.ChiTiet.CameraFeatures.Split(";");
+    string[] imageUrls = ViewBag.ChiTiet.ImageUrls.Split(";");
 }
 
-<h1 class="mb-4 mt-2 .text-primary">Camera > @ViewBag.ChiTiet.BrandName > @ViewBag.ChiTiet.Category > Details</h1>
-<div class="details-content">
-    <h2>Tên thể loại: @ViewBag.ChiTiet.CameraName</h2>
-    <p>
-        <span><strong>Hãng:&nbsp;&nbsp;</strong>@ViewBag.ChiTiet.BrandName</span>
-        <span><strong>Loại:&nbsp;&nbsp;</strong>@ViewBag.ChiTiet.Category</span>
-    </p>
-    <h3><strong>Giá:&nbsp;&nbsp;</strong>@ViewBag.ChiTiet.CameraPrice</h3>
-    <ul>
-        @foreach(string feature in features) {
-            <li>@feature</li>
-        }
-    </ul>
-    <p>@ViewBag.ChiTiet.CameraIntroduction</p>
-    <div class="details-image">
-        <img src="@ViewBag.ChiTiet.ImageUrls" />
+<div class="container pb-5 pt-5">
+    <h1 class="mb-4 mt-2 .text-primary">Camera > @ViewBag.ChiTiet.BrandName > @ViewBag.ChiTiet.Category > Details</h1>
+    <div class="details-content">
+        <h2>Tên thể loại: @ViewBag.ChiTiet.CameraName</h2>
+        <div class="images-block">
+            @foreach (string url in imageUrls) {
+                if(url.Equals("")) continue;
+                <img src="/@url" alt="an image of @ViewBag.ChiTiet.CameraName" />
+            }
+        </div>
+        <p>
+            <span><strong>Hãng:&nbsp;&nbsp;</strong>@ViewBag.ChiTiet.BrandName</span>
+            <span><strong>Loại:&nbsp;&nbsp;</strong>@ViewBag.ChiTiet.Category</span>
+        </p>
+        <h3><strong>Giá:&nbsp;&nbsp;</strong>@ViewBag.ChiTiet.CameraPrice</h3>
+        <ul>
+            @foreach(string feature in features)
+            {
+                <li>@feature</li>
+            }
+        </ul>
+        <p>@ViewBag.ChiTiet.CameraIntroduction</p>
     </div>
 </div>
+
 <a asp-controller="Home" asp-action="">Trở về</a>

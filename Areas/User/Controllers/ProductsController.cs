@@ -20,5 +20,25 @@ namespace TH4_Nhom20.Areas.User.Controllers
             ViewBag.Cameras = camera;
             return View();
         }
+
+        public IActionResult Details(int id)
+        {
+            var chiTietMayAnh = (from camera in _db.CAMERA
+                                 join brand in _db.BRAND on camera.Brand.Id equals brand.Id
+                                 where camera.Id == id
+                                 select new
+                                 {
+                                     CameraName = camera.Name,
+                                     BrandName = brand.Name,
+                                     Category = camera.Category,
+                                     CameraPrice = camera.Price,
+                                     CameraFeatures = camera.Features,
+                                     CameraIntroduction = camera.Introduction,
+                                     ImageUrls = camera.ImageUrls
+                                 }
+                           ).ToList();
+            ViewBag.ChiTiet = chiTietMayAnh[0];
+            return View();
+        }
     }
 }

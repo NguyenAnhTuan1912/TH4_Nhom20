@@ -8,13 +8,19 @@ html {
   }
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+.border-left {
+    border-left: 1px solid #dee2e6 !important;
 }
 
-body {
-  margin-bottom: 60px;
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+.sticky {
+    position: sticky !important;
+    top: 0;
+    z-index: 10;
 }
 
 table {
@@ -29,7 +35,7 @@ td, th {
     padding: 8px;
 }
 
-.create-form__input-container {
+.form__input-container {
     margin-bottom: 25px;
 }
 
@@ -64,7 +70,16 @@ td, th {
     margin-bottom: 25px;
 }
 
-.details-image, .details-image img {
+.images-block {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 820px;
+    height: 300px;
+    margin: 15px 0;
+}
+
+.images-block img {
     width: 400px;
     height: 300px;
 }
@@ -75,4 +90,97 @@ ul li {
 
 .product-item p {
     margin-bottom: 0px;
+}
+
+.form-input__file-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: 15px 0;
+}
+
+.form-input__file-main label {
+    margin-right: 8px;
+}
+
+.form-input__file {
+    display: flex;
+    align-items: center;
+}
+
+.form-input__file:not(.form-input__file:first-child) {
+    margin-top: 15px;
+}
+
+.form-input__file-buttons {
+    height: 24px;
+}
+
+.other-buttons {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+    margin-top: 15px;
+    margin-bottom: 25px;
+}
+
+.other-buttons button {
+    width: 100%;
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.image-container img {
+    width: 90%;
+}
+
+.card {
+    padding: 12px 0;
+}
+
+.details {
+    margin-bottom: 30px;
+}
+
+.details {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid transparent;
+    border-radius: 0;
+}
+
+.details .details-subtitle {
+    font-weight: 300;
+    margin-bottom: 10px;
+    color: #8898aa;
+}
+
+.table-product.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f3f8fa !important
+}
+
+.table-product td {
+    border-top: 0px solid #dee2e6 !important;
+    color: #728299 !important;
+    width: 50%;
+}
+
+.details-big-image img {
+    width: 100%;
+}
+
+.key-features li {
+    display: flex;
+    align-items: center;
 }

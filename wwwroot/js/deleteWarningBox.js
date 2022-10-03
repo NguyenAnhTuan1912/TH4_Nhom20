@@ -1,9 +1,9 @@
-﻿function deleteRecord(id, target) {
+﻿function deleteRecord(id, row) {
     $.ajax({
         url: `Cameras/Delete/${id}`,
         type: 'POST'
-    }).done((data) => {
-        target.closest('tr').remove();
+    }).done(() => {
+        row.closest('tr').remove();
     });
 }
 

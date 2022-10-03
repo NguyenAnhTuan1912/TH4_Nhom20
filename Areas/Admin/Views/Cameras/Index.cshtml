@@ -6,64 +6,59 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 
-<h1 class="mb-4 mt-2 .text-primary">Máy ảnh / Tất cả</h1>
-<table id="camera-table">
-    <thead>
-        <tr>
-        <th>Số thứ tự</th>
-        <th>Tên máy</th>
-        <th>Tên hãng</th>
-        <th>Loại máy</th>
-        <th>Chức năng</th>
-    </tr>
-    </thead>
-    <tbody>
-        @{
-            int index = 1;
-            foreach (var camera in @ViewBag.Cameras)
-            {
-                <tr>
-                    <td>@index</td>
-                    <td>@camera.Name</td>
-                    <td>@camera.BrandName</td>
-                    <td>@camera.Category</td>
-                    <td>
-                        <a 
-                    asp-controller="Cameras"
-                    asp-action="Details"
-                    asp-route-id=@camera.Id
-                    class="btn btn-primary"
-                        >
-                            Chi tiết
-                        </a>
-                        |
-                        <a 
-                    asp-controller="Cameras"
-                    asp-action="Edit"
-                    asp-route-id=@camera.Id
-                    class="btn btn-warning"
-                        >
-                            Chỉnh sửa
-                        </a>
-                        |
-                        <a 
-                            data-itemid=@camera.Id
-                            class="btn btn-danger delete-button"
-                        >
-                            Xoá
-                        </a>
+<div class="container pb-5 pt-5">
+    <h1 class="mb-4 mt-2 .text-primary">Máy ảnh / Tất cả</h1>
+    <table id="camera-table">
+        <thead>
+            <tr>
+                <th>Số thứ tự</th>
+                <th>Tên máy</th>
+                <th>Tên hãng</th>
+                <th>Loại máy</th>
+                <th>Chức năng</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int index = 1;
+                foreach (var camera in @ViewBag.Cameras)
+                {
+                    <tr>
+                        <td>@index</td>
+                        <td>@camera.Name</td>
+                        <td>@camera.BrandName</td>
+                        <td>@camera.Category</td>
+                        <td>
+                            <a asp-controller="Cameras"
+                                asp-action="Details"
+                                asp-route-id=@camera.Id
+                                class="btn btn-primary">
+                                Chi tiết
+                            </a>
+                            |
+                            <a asp-controller="Cameras"
+                                asp-action="Edit"
+                                asp-route-id=@camera.Id
+                                class="btn btn-warning">
+                                Chỉnh sửa
+                            </a>
+                            |
+                            <a data-itemid=@camera.Id
+                                class="btn btn-danger delete-button">
+                                Xoá
+                            </a>
 
-                    </td>
-                </tr>
-                index += 1;
+                        </td>
+                    </tr>
+                    index += 1;
+                }
             }
-        }
-    </tbody>
-</table>
-<partial name="~/Views/Shared/_CameraActionPartial.cshtml" />
-
+        </tbody>
+    </table>
+    <partial name="~/Views/Shared/_CameraActionPartial.cshtml" />
+</div>
+<partial name="~/Views/Shared/_DeleteWarningBoxScriptPartial.cshtml" />
 @section Scripts {
-    <partial name="~/Views/Shared/_DeleteWarningBoxScriptPartial.cshtml" />
     <script>
         $(document).ready(function () {
             $('#camera-table').DataTable();

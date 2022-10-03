@@ -27,10 +27,10 @@ namespace TH4_Nhom20.Models
         [Required(ErrorMessage = "Phần giới thiệu của máy ảnh không được để trống!")]
         [Display(Name = "Giời thiệu về thiết bị")]
         public string CameraIntroduction { get; set; }
-        [Display(Name = "Tải ảnh lên")]
+        [Required(ErrorMessage = "Ảnh buộc phải có!")]
+        [Display(Name = "Ảnh")]
         [NotMapped]
-        [ValidateNever]
-        public IFormFile ImageFile { get; set; }
+        public List<IFormFile> ImageFile { get; set; }
         [ValidateNever]
         public string OldImageUrls { get; set; }
     }

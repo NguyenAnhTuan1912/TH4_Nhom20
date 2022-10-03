@@ -28,6 +28,41 @@ namespace TH4_Nhom20.Controllers
             ViewBag.Cameras = camera;
             return View();
         }
+
+        public async void saveImage(IFormFile file, string pathName)
+        {
+            using(FileStream fs = new FileStream(pathName, FileMode.Create))
+            {
+                await file.CopyToAsync(fs);
+            }
+        }
+
+        public string getImageUrl(string[] folderNames, string fileName)
+        {
+            string url = Path.Combine(folderNames);
+            url = Path.Combine(url, fileName);
+            return url.Replace(@"\", "/");
+        }
+
+        public string getPathName(IFormFile file, string[] folderNames)
+        {
+            string rootPath = this._webHostEnvironment.WebRootPath;
+            foreach (string line in folderNames)
+            {
+                rootPath = Path.Combine(rootPath, line);
+            }
+            string fileName = Path.GetFileName(file.FileName);
+            string path = Path.Combine(rootPath, fileName);
+            return path;
+        }
+
+        public string getPathName(IFormFile file, string oldUrl)
+        {
+            string rootPath = this._webHostEnvironment.WebRootPath;
+            rootPath = Path.Combine(rootPath, oldUrl);
+            return rootPath;
+        }
+
         // Create
         [HttpGet]
         public IActionResult Create()
@@ -54,32 +89,20 @@ namespace TH4_Nhom20.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Query ra record(s) brand theo BrandID mà người dùng chọn, lấy record đầu tiên
                 var brand = _db.BRAND.Where(o => o.Id == chiTietMayAnh.BrandId).First();
-                // Tạo instance cho ImageModel
+                List<string> pathNames = new List<string>();
+                List<string> urls = new List<string>();
                 ImageModel image = new ImageModel();
-                string path = "";
-                // Tên nhập từ form sẽ xoá các khoảng trống đi và gôm lại với nhau, dùng để lưu tên ảnh.
-                string fileName = string.Join("", chiTietMayAnh.CameraName.Split(' '));
-                // Nếu như có file gửi về server thì thực hiện câu lệnh trong If, còn lại thì bỏ qua.
-                if (chiTietMayAnh.ImageFile != null)
+                if (chiTietMayAnh.ImageFile.Count > 0)
                 {
-                    // Lấy ra đường dẫn mà server đang được đặt. Ví dụ server đang ở trong ô D thì 
-                    // có đường dẫn là D:/[project-name]
-                    string rootPath = _webHostEnvironment.WebRootPath;
-                    // Lấy ra đuổi file.
-                    string extension = Path.GetExtension(chiTietMayAnh.ImageFile.FileName);
-                    fileName += extension;
-                    path = Path.Combine(
-                        rootPath + "/images/" + brand.Name + '/' + chiTietMayAnh.Category + '/' + fileName
-                    );
-                    // Mở một đường ống tới đúng địa chỉ trong path, tạo một file mới.
-                    // Bước này quan trọng.
-                    using (FileStream fs = new FileStream(path, FileMode.Create))
+                    string[] folderNames = { "images", brand.Name, chiTietMayAnh.Category };
+                    foreach(IFormFile file in chiTietMayAnh.ImageFile)
                     {
-                        await chiTietMayAnh.ImageFile.CopyToAsync(fs);
+                        pathNames.Add(getPathName(file, folderNames));
+                        saveImage(file, pathNames[pathNames.Count - 1]);
+                        urls.Add(getImageUrl(folderNames, Path.GetFileName(file.FileName)));
+                        image.FileName += ";" + Path.GetFileNameWithoutExtension(file.FileName);
                     }
-                    image.FileName = fileName;
                 }
 
                 CameraModel camera = new CameraModel
@@ -92,7 +115,7 @@ namespace TH4_Nhom20.Controllers
                     Category = chiTietMayAnh.Category,
                     Features = chiTietMayAnh.CameraFeatures,
                     Introduction = chiTietMayAnh.CameraIntroduction,
-                    ImageUrls = (String.IsNullOrEmpty(path)) ? "" : "/images/" + brand.Name + '/' + chiTietMayAnh.Category + '/' + fileName
+                    ImageUrls = (urls.Count == 0) ? "" : String.Join(";", urls.ToArray())
                 };
 
                 _db.IMAGE.Add(image);
@@ -146,52 +169,52 @@ namespace TH4_Nhom20.Controllers
             if(ModelState.IsValid)
             {
                 var brand = _db.BRAND.Where(o => o.Id == chiTietMayAnh.BrandId).First();
-                string fileName = string.Join("", chiTietMayAnh.CameraName.Split(' '));
-                string fullFileName = fileName + Path.GetExtension(chiTietMayAnh.ImageFile.FileName);
-                string rootPath = _webHostEnvironment.WebRootPath;
-                string path = "";
+                List<string> pathNames = new List<string>();
+                List<string> urls = new List<string>();
                 ImageModel image = new ImageModel();
-                if (chiTietMayAnh.ImageFile != null)
+                if (chiTietMayAnh.ImageFile.Count > 0)
                 {
-                    //  Neu nhu chi co thay doi anh, khong thay doi hang, loai va ten may.
-                    if (
-                        chiTietMayAnh.OldImageUrls.Contains(brand.Name)
-                        && chiTietMayAnh.OldImageUrls.Contains(chiTietMayAnh.Category)
-                        && chiTietMayAnh.OldImageUrls.Contains(fileName)
-                    )
+                    int i = 0;
+                    string[] oldUrls = chiTietMayAnh.OldImageUrls.Split(";");
+                    string[] folderNames = { "images", brand.Name, chiTietMayAnh.Category };
+                    foreach (IFormFile file in chiTietMayAnh.ImageFile)
                     {
-                        path = Path.Combine(
-                            rootPath + chiTietMayAnh.OldImageUrls
-                        );
-                        System.IO.File.Delete(path);
-                        using (FileStream fs = new FileStream(path, FileMode.Create))
+                        if(
+                            chiTietMayAnh.OldImageUrls.Contains(brand.Name)
+                            && chiTietMayAnh.OldImageUrls.Contains(chiTietMayAnh.Category)
+                            && chiTietMayAnh.OldImageUrls.Contains(Path.GetFileNameWithoutExtension(file.FileName))
+                        )
                         {
-                            await chiTietMayAnh.ImageFile.CopyToAsync(fs);
-                        }
-                        image.FileName = fullFileName;
-                    } else
-                    {
-                        // Neu nhu doi 1 tong 3 gia tri la hang, loai hoac ten may
-                        System.IO.File.Delete(rootPath + chiTietMayAnh.OldImageUrls);
-                        string extension = Path.GetExtension(chiTietMayAnh.ImageFile.FileName);
-                        fileName += extension;
-                        path = Path.Combine(
-                            rootPath + "/images/" + brand.Name + '/' + chiTietMayAnh.Category + '/' + fullFileName
-                        );
-                        using (FileStream fs = new FileStream(path, FileMode.Create))
+                            System.IO.File.Delete(getPathName(file, oldUrls[i]));
+                            saveImage(file, getPathName(file, oldUrls[i]));
+                        } else
                         {
-                            await chiTietMayAnh.ImageFile.CopyToAsync(fs);
+                            if(chiTietMayAnh.OldImageUrls.Contains(Path.GetFileNameWithoutExtension(file.FileName)))
+                            {
+                                pathNames.Add(getPathName(file, folderNames));
+                                saveImage(file, pathNames[pathNames.Count - 1]);
+                                urls.Add(getImageUrl(folderNames, Path.GetFileName(file.FileName)));
+                                image.FileName += ";" + Path.GetFileNameWithoutExtension(file.FileName);
+                            } else
+                            {
+                                System.IO.File.Delete(getPathName(file, oldUrls[i]));
+                                pathNames.Add(getPathName(file, folderNames));
+                                saveImage(file, pathNames[pathNames.Count - 1]);
+                                urls.Add(getImageUrl(folderNames, Path.GetFileName(file.FileName)));
+                                image.FileName += ";" + Path.GetFileNameWithoutExtension(file.FileName);
+                            }
                         }
-                        image.FileName = fullFileName;
+                        i += 1;
                     }
                 }
+
                 var oldInformationOfCamera = _db.CAMERA.Where(o => o.Id == chiTietMayAnh.CameraId).First();
                 oldInformationOfCamera.Name = chiTietMayAnh.CameraName;
                 oldInformationOfCamera.Brand = brand;
                 oldInformationOfCamera.Price = chiTietMayAnh.CameraPrice;
                 oldInformationOfCamera.Features = chiTietMayAnh.CameraFeatures;
                 oldInformationOfCamera.Introduction = chiTietMayAnh.CameraIntroduction;
-                oldInformationOfCamera.ImageUrls = "/images/" + brand.Name + '/' + chiTietMayAnh.Category + '/' + fullFileName;
+                oldInformationOfCamera.ImageUrls = (urls.Count < 1) ? oldInformationOfCamera.ImageUrls : String.Join(";", urls.ToArray());
                 oldInformationOfCamera.BrandName = brand.Name;
 
                 var potentialImage = (from c in _db.CAMERA
@@ -199,7 +222,7 @@ namespace TH4_Nhom20.Controllers
                                where c.Id == chiTietMayAnh.CameraId
                                select i).First();
                 var oldInformationOfImage = _db.IMAGE.Where(o => o.Id == potentialImage.Id).First();
-                oldInformationOfImage.FileName = fileName;
+                oldInformationOfImage.FileName = image.FileName;
 
                 await _db.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -238,7 +261,7 @@ namespace TH4_Nhom20.Controllers
             {
                 return NotFound();
             }
-            var cameraDetails = (
+            var imageIdIncameraDetails = (
                 from c in _db.CAMERA
                 join i in _db.IMAGE on c.Image.Id equals i.Id
                 where c.Id == id
@@ -248,12 +271,16 @@ namespace TH4_Nhom20.Controllers
                 }
             ).ToList()[0];
             var camera = _db.CAMERA.Where(o => o.Id == id).First();
-            var image = _db.IMAGE.Where(o => o.Id == cameraDetails.ImageId).First();
+            var image = _db.IMAGE.Where(o => o.Id == imageIdIncameraDetails.ImageId).First();
             string rootPath = _webHostEnvironment.WebRootPath;
-            string path = Path.Combine(
-                rootPath + camera.ImageUrls
-            );
-            System.IO.File.Delete(path);
+            string[] oldUrls = camera.ImageUrls.Split(";");
+            foreach (string url in oldUrls)
+            {
+                if(url.Equals("")) continue;
+                string path = Path.Combine(rootPath, url);
+                System.IO.File.Delete(path);
+            }
+            
             _db.CAMERA.Remove(camera);
             _db.IMAGE.Remove(image);
             _db.SaveChanges();

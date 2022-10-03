@@ -1,9 +1,39 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-
+<partial name="../Shared/_UserHeaderPartial.cshtml" />
+<!-- Section-->
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            @foreach (var item in @ViewBag.Cameras) {
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- Product image-->
+                        <div class="image-container">
+                            <img class="card-img-top" src="/@item.ImageUrls.Split(";")[0]" alt="an image of @item.Name" />
+                        </div>
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">@item.Name</h5>
+                                <!-- Product price-->
+                                @item.Price
+                        </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" asp-area="User" asp-controller="Products" asp-action="Details" asp-route-id="@item.Id">View options</a></div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<partial name="../Shared/_UserFooterPartial.cshtml" />
 <div class="text-center">
-    <h1 class="display-4">Chào mừng đến với shop bán camera.</h1>
     <p>Điều chỉnh, xem danh sách các thể loại, vai trò <strong>Admin</strong> <a asp-area="Admin" asp-controller="Cameras" asp-action="">tại đây</a>.</p>
     <p>Điều chỉnh, xem danh sách các thể loại, vai trò <strong>User</strong> <a asp-area="User" asp-controller="Products" asp-action="">tại đây</a>.</p>
 </div>

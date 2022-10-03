@@ -3,32 +3,32 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>@ViewData["Title"]</h1>
 <div class="container">
+	<h1>@ViewData["Title"]</h1>
 	<h3>Thêm máy ảnh mới</h3>
 	<form method="post" id="create-form" action="" enctype="multipart/form-data">
 		<div asp-validation-summary="All" class="text-danger"></div>
-		<article class="create-form__input-container">
+		<article class="form__input-container">
 			<label asp-for="CameraName">Tên máy</label>
 			<input asp-for="CameraName" type="text" class="form-control" />
 			<span asp-validation-for="CameraName" class="text-danger"></span>
 		</article>
-		<article class="create-form__input-container">
+		<article class="form__input-container">
 			<label asp-for="CameraPrice">Giá bán</label>
 			<input asp-for="CameraPrice" type="text" class="form-control" />
 			<span asp-validation-for="CameraPrice" class="text-danger"></span>
 		</article>
-		<article class="create-form__input-container">
+		<article class="form__input-container">
 			<label asp-for="CameraFeatures">Tính năng của máy</label>
 			<textarea asp-for="CameraFeatures" class="description-field"></textarea>
 			<span asp-validation-for="CameraFeatures" class="text-danger"></span>
 		</article>
-		<article class="create-form__input-container">
+		<article class="form__input-container">
 			<label asp-for="CameraIntroduction">Giới thiệu thiết bị</label>
 			<textarea asp-for="CameraIntroduction" class="description-field"></textarea>
 			<span asp-validation-for="CameraIntroduction" class="text-danger"></span>
 		</article>
-		<article class="create-form__input-container">
+		<article class="form__input-container">
 			<label asp-for="BrandId">Hãng</label>
 			<select asp-for="BrandId" asp-items="@ViewBag.BrandNames" class="form-control">
 				<option>Chọn tên hãng</option>
@@ -42,17 +42,14 @@
 				<option>Chọn loại</option>
 			</select>
 		</article>
-		<article class="create-form__input-container">
-			<label asp-for="ImageFile">Hình ảnh</label>
-			<input asp-for="ImageFile" type="file" accept="image/*" />
-			<span asp-validation-for="ImageFile" class="text-danger"></span>
+		<article class="form__input-container" id="input-file-tags">
 		</article>
+		<div class="other-buttons">
+			<button type="button" class="btn btn-outline-secondary" id="js-addNewInputFileTagButton">Thêm ảnh</button>
+		</div>
 		<button type="submit" class="btn btn-primary">Tạo mới</button>
 	</form>
 </div>
 <partial name="~/Views/Shared/_CameraActionPartial.cshtml" />
-@section Scripts{
-	@{
-		<partial name="_ValidationScriptsPartial"/>
-	}
-}
+<partial name="../Shared/_AdminAddInputFileTagPartial.cshtml" />
+<partial name="~/Views/Shared/_ValidationScriptsPartial.cshtml" />
