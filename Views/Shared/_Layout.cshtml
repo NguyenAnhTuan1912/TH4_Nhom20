@@ -12,7 +12,9 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
+    <partial name="~/Views/Shared/_HeaderPartial.cshtml" />
     @RenderBody()
+    <partial name="~/Views/Shared/_FooterPartial.cshtml" />
     <script defer src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

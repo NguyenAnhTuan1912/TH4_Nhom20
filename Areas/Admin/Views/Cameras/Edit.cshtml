@@ -46,6 +46,7 @@
                 if(url.Equals("")) continue;
                 <img src="/@url" alt="an image of @ViewBag.ChiTiet.CameraName" />
             }
+			<input asp-for="OldImageUrls" type="hidden" value=@ViewBag.ChiTiet.ImageUrls />
         </div>
 		<article class="form__input-container" id="input-file-tags">
 		</article>

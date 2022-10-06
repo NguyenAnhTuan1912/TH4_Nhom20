@@ -1,7 +1,14 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-<partial name="../Shared/_UserHeaderPartial.cshtml" />
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Shop in style</h1>
+            <p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p>
+        </div>
+    </div>
+</header>
 <!-- Section-->
 <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
@@ -32,8 +39,3 @@
         </div>
     </div>
 </section>
-<partial name="../Shared/_UserFooterPartial.cshtml" />
-<div class="text-center">
-    <p>Điều chỉnh, xem danh sách các thể loại, vai trò <strong>Admin</strong> <a asp-area="Admin" asp-controller="Cameras" asp-action="">tại đây</a>.</p>
-    <p>Điều chỉnh, xem danh sách các thể loại, vai trò <strong>User</strong> <a asp-area="User" asp-controller="Products" asp-action="">tại đây</a>.</p>
-</div>

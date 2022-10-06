@@ -3,6 +3,7 @@
     input.type = 'file';
     input.accept = 'image/*';
     input.name = 'ImageFile';
+    input.classList.add('input-image');
     input.setAttribute('data-val', true);
     input.setAttribute('data-val-required', 'Ảnh buộc phải có!');
     return input;
@@ -53,15 +54,17 @@ function createDeleteButtonGroup(amount) {
     return div;
 }
 
-const addCompleteInputFileGroupToList = (function() {
+const addCompleteInputFileGroupToList = (function () {
     return function () {
         const inputFileTags = document.getElementById('input-file-tags');
+        if (inputFileTags.getElementsByClassName('input-image').length >= 2) return;
         const completeGroup = document.createElement('div');
         completeGroup.classList.add('form-input__file');
         const buttonGroup = createDeleteButtonGroup(1);
         const inputGroup = createInputGroup();
         completeGroup.append(inputGroup, buttonGroup);
         inputFileTags.append(completeGroup);
+        amount = inputFileTags.getElementsByClassName('input-image').length;
     }
 })();
 

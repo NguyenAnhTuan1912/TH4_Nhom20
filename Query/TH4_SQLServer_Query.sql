@@ -18,9 +18,12 @@ USE CAMERA
 -- Xem dữ liệu trong table BRAND của database PHIM
 -- 1. Xem tất cả dữ liệu trong Table BRAND
 SELECT * FROM BRAND
--- MỚI: xem tất cả dữ liệu trong Table CAMERA
+-- xem tất cả dữ liệu trong Database
 SELECT * FROM CAMERA
 SELECT * FROM IMAGE
+SELECT * FROM AspNetUsers
+SELECT * FROM AspNetRoles
+SELECT * FROM AspNetUserRoles
 
 -- Xem tất chi tiết tất cả các thể loại
 SELECT BRAND.Id, BRAND.Name, CAMERA.Description, BRAND.DateCreated FROM BRAND

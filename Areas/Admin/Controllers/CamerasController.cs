@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Versioning;
+using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -161,18 +164,20 @@ namespace TH4_Nhom20.Controllers
             ViewBag.CategoryNamesOfEachBrand = categories;
             return View();
         }
+
         [HttpPost]
         [DisableRequestSizeLimit, RequestFormLimits(MultipartBodyLengthLimit = int.MaxValue,
         ValueLengthLimit = int.MaxValue)]
         public async Task<IActionResult> Edit(CameraDetailsViewModel chiTietMayAnh)
         {
+            var brand = _db.BRAND.Where(o => o.Id == chiTietMayAnh.BrandId).First();
+            ModelState.Remove("ImageFile");
             if(ModelState.IsValid)
             {
-                var brand = _db.BRAND.Where(o => o.Id == chiTietMayAnh.BrandId).First();
                 List<string> pathNames = new List<string>();
                 List<string> urls = new List<string>();
                 ImageModel image = new ImageModel();
-                if (chiTietMayAnh.ImageFile.Count > 0)
+                if (chiTietMayAnh.ImageFile != null)
                 {
                     int i = 0;
                     string[] oldUrls = chiTietMayAnh.OldImageUrls.Split(";");
@@ -187,22 +192,28 @@ namespace TH4_Nhom20.Controllers
                         {
                             System.IO.File.Delete(getPathName(file, oldUrls[i]));
                             saveImage(file, getPathName(file, oldUrls[i]));
-                        } else
+                        } 
+                        else if (
+                            chiTietMayAnh.OldImageUrls.Contains(brand.Name)
+                            && chiTietMayAnh.OldImageUrls.Contains(chiTietMayAnh.Category)
+                            && !chiTietMayAnh.OldImageUrls.Contains(Path.GetFileNameWithoutExtension(file.FileName))
+                            && chiTietMayAnh.ImageFile.Count == 1
+                        )
                         {
-                            if(chiTietMayAnh.OldImageUrls.Contains(Path.GetFileNameWithoutExtension(file.FileName)))
-                            {
-                                pathNames.Add(getPathName(file, folderNames));
-                                saveImage(file, pathNames[pathNames.Count - 1]);
-                                urls.Add(getImageUrl(folderNames, Path.GetFileName(file.FileName)));
-                                image.FileName += ";" + Path.GetFileNameWithoutExtension(file.FileName);
-                            } else
-                            {
-                                System.IO.File.Delete(getPathName(file, oldUrls[i]));
-                                pathNames.Add(getPathName(file, folderNames));
-                                saveImage(file, pathNames[pathNames.Count - 1]);
-                                urls.Add(getImageUrl(folderNames, Path.GetFileName(file.FileName)));
-                                image.FileName += ";" + Path.GetFileNameWithoutExtension(file.FileName);
-                            }
+                            pathNames.Add(getPathName(file, folderNames));
+                            saveImage(file, pathNames[pathNames.Count - 1]);
+                            urls.Add(oldUrls[0]);
+                            urls.Add(getImageUrl(folderNames, Path.GetFileName(file.FileName)));
+                            string[] splitedOldUrl = oldUrls[0].Split(';');
+                            image.FileName += splitedOldUrl[splitedOldUrl.Length - 1] + ";" + Path.GetFileNameWithoutExtension(file.FileName);
+                        } 
+                        else
+                        {
+                            System.IO.File.Delete(getPathName(file, oldUrls[i]));
+                            pathNames.Add(getPathName(file, folderNames));
+                            saveImage(file, pathNames[pathNames.Count - 1]);
+                            urls.Add(getImageUrl(folderNames, Path.GetFileName(file.FileName)));
+                            image.FileName += ";" + Path.GetFileNameWithoutExtension(file.FileName);
                         }
                         i += 1;
                     }
@@ -211,6 +222,7 @@ namespace TH4_Nhom20.Controllers
                 var oldInformationOfCamera = _db.CAMERA.Where(o => o.Id == chiTietMayAnh.CameraId).First();
                 oldInformationOfCamera.Name = chiTietMayAnh.CameraName;
                 oldInformationOfCamera.Brand = brand;
+                oldInformationOfCamera.Category = chiTietMayAnh.Category;
                 oldInformationOfCamera.Price = chiTietMayAnh.CameraPrice;
                 oldInformationOfCamera.Features = chiTietMayAnh.CameraFeatures;
                 oldInformationOfCamera.Introduction = chiTietMayAnh.CameraIntroduction;
@@ -222,13 +234,12 @@ namespace TH4_Nhom20.Controllers
                                where c.Id == chiTietMayAnh.CameraId
                                select i).First();
                 var oldInformationOfImage = _db.IMAGE.Where(o => o.Id == potentialImage.Id).First();
-                oldInformationOfImage.FileName = image.FileName;
+                oldInformationOfImage.FileName = (image.FileName == null) ? oldInformationOfImage.FileName : image.FileName;
 
                 await _db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            
-            return View();
+            return RedirectToAction("Edit");
         }
 
         // Details
