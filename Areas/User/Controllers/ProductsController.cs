@@ -2,7 +2,7 @@
 using TH4_Nhom20.Data;
 using TH4_Nhom20.Models;
 
-namespace TH4_Nhom20.Areas.User.Controllers
+namespace TTH4_Nhom20.Controllers
 {
     [Area("User")]
     public class ProductsController : Controller
