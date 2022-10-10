@@ -32,4 +32,8 @@
     <Folder Include="wwwroot\images\Canon\DSLR\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="Areas\Admin\Views\Shared\_AdminAddInputFileTagPartial.cshtml" />
+  </ItemGroup>
+
 </Project>
