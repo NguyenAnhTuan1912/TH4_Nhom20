@@ -19,8 +19,8 @@ namespace TH4_Nhom20.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<CameraModel> camera = _db.CAMERA.ToList();
-            ViewBag.Cameras = camera;
+            IEnumerable<CameraModel> cameras = _db.CAMERA.ToList();
+            ViewBag.Cameras = cameras;
             return View();
         }
 
