@@ -1,16 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using NuGet.Versioning;
-using System.Drawing.Drawing2D;
-using System.IO;
-using System.Linq;
-using System.Text.RegularExpressions;
 using TH4_Nhom20.Data;
-using TH4_Nhom20.Data.Migrations;
 using TH4_Nhom20.Models;
-using static System.Collections.Specialized.BitVector32;
 
 namespace TH4_Nhom20.Controllers
 {

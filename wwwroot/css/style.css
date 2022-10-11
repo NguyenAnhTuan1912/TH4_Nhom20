@@ -123,6 +123,7 @@ td, th {
 
 ul li {
 	list-style-position: inside;
+	list-style: none;
 }
 
 .product-item p {
@@ -530,13 +531,11 @@ ol {
 
 .header__top__right {
 	text-align: right;
-	padding: 10px 0 13px;
 }
 
 .header__top__right__social {
 	position: relative;
 	display: inline-block;
-	margin-right: 35px;
 }
 
 .header__top__right__social:after {
@@ -1166,6 +1165,7 @@ ol {
 	position: relative;
 	overflow: hidden;
 	background-position: center center;
+	background-size: 180px;
 }
 
 .featured__item__pic__hover {
@@ -1842,6 +1842,7 @@ ol {
 	height: 270px;
 	position: relative;
 	overflow: hidden;
+	background-size: 180px;
 }
 
 .product__item__pic__hover {
@@ -2030,9 +2031,7 @@ ol {
 }
 
 .product__details__text ul {
-	border-top: 1px solid #ebebeb;
-	padding-top: 40px;
-	margin-top: 50px;
+	margin-bottom: 30px;
 }
 
 .product__details__text ul li {

@@ -2,10 +2,6 @@
     ViewData["Title"] = "Máy ảnh";
 }
 
-
-<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
-<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-
 <div class="container pb-5 pt-5">
     <h1 class="mb-4 mt-2 .text-primary">Máy ảnh / Tất cả</h1>
     <table id="camera-table">
@@ -55,9 +51,7 @@
             }
         </tbody>
     </table>
-    <partial name="~/Views/Shared/_CameraActionPartial.cshtml" />
 </div>
-<partial name="~/Views/Shared/_DeleteWarningBoxScriptPartial.cshtml" />
 @section Scripts {
     <script>
         $(document).ready(function () {

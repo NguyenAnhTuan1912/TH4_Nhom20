@@ -40,24 +40,28 @@
     <None Include="Areas\User\Views\Home\Index.cshtml" />
     <None Include="Areas\User\Views\Home\Privacy.cshtml" />
     <None Include="Areas\User\Views\Shop\Cart.cshtml" />
-    <None Include="Areas\User\Views\Shop\Detail.cshtml" />
+    <None Include="Areas\User\Views\Shop\Details.cshtml" />
     <None Include="Areas\User\Views\Shop\Index.cshtml" />
-    <None Include="Views\Shared\_AdminAddInputFileTagPartial.cshtml" />
+    <None Include="Areas\Admin\Views\Shared\_AdminAddInputFileTagPartial.cshtml" />
     <None Include="wwwroot\fonts\ElegantIcons.svg" />
     <None Include="wwwroot\fonts\fontawesome-webfont.svg" />
     <None Include="wwwroot\fonts\fontawesome-webfont.woff2" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Areas\User\Views\_ViewImports.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
     <Content Update="Views\Shared\Error.cshtml">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Update="Views\Shared\_HeaderPartial.cshtml">
+    <Content Update="Areas\User\Views\Shared\_UserHeaderPartial.cshtml">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Update="Views\Shared\_Layout.cshtml">
+    <Content Update="Areas\User\Views\Shared\_Layout.cshtml">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
