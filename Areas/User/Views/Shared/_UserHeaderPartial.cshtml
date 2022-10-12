@@ -2,7 +2,7 @@
     string currentControllerName = ViewContext.RouteData.Values["controller"].ToString();
     string isHomeShowing = currentControllerName.Equals("Home") ? "active" : "";
     string isShopShowing = currentControllerName.Equals("Shop") ? "active" : "";
-    string isBlogShowing = currentControllerName.Equals("Blog") ? "active" : "";
+    string isContactShowing = currentControllerName.Equals("Contact") ? "active" : "";
 }
 <!-- Header Section Begin -->
     <header class="header">
@@ -53,15 +53,7 @@
                         <ul>
                             <li class=@isHomeShowing><a asp-area="User" asp-controller="Home" asp-action="">Home</a></li>
                             <li class=@isShopShowing><a asp-area="User" asp-controller="Shop" asp-action="">Shop</a></li>
-                            <li>
-                                <a href="#">Pages</a>
-                                <ul class="header__menu__dropdown">
-                                    <li><a asp-controller="Shop" asp-action="Cart">Shoping Cart</a></li>
-                                    <li><a asp-controller="Checkout" asp-action="">Check Out</a></li>
-                                </ul>
-                            </li>
-                            <li class=@isBlogShowing><a asp-controller="Blog">Blog</a></li>
-                            <li><a asp-controller="Contact" asp-action="">Contact</a></li>
+                            <li class=@isContactShowing><a asp-area="User" asp-controller="Contact" asp-action="">Contact</a></li>
                         </ul>
                     </nav>
                 </div>

@@ -654,6 +654,7 @@ ol {
 
 .header__menu {
 	padding: 24px 0;
+	text-align: center;
 }
 
 .header__menu ul li {
@@ -1010,24 +1011,24 @@ ol {
 */
 .banner-container {
 	display: flex;
-	justify-content: flex-end;
-	margin-bottom: 50px;
+	justify-content: center;
+	margin: 0 auto 50px auto;
 }
 
-.banner {
+.big-banner {
 	width: 75%;
 	height: 431px;
 	display: flex;
 	align-items: center;
-	padding-left: 75px;
+	margin: 0 auto;
 }
 
-.banner.set-bg {
+.big-banner.set-bg {
 	background-size: 300px;
 	background-position: center right;
 }
 
-.banner__text {
+.big-banner__text {
 	font-size: 14px;
 	text-transform: uppercase;
 	font-weight: 700;
@@ -1035,7 +1036,7 @@ ol {
 	color: #7fad39;
 }
 
-.banner__text span {
+.big-banner__text span {
 	font-size: 14px;
 	text-transform: uppercase;
 	font-weight: 700;
@@ -1043,7 +1044,7 @@ ol {
 	color: #7fad39;
 }
 
-.banner__text h2 {
+.big-banner__text h2 {
 	font-size: 46px;
 	color: #252525;
 	line-height: 52px;
@@ -1051,7 +1052,61 @@ ol {
 	margin: 10px 0;
 }
 
+.big-banner__text p {
+	margin-bottom: 35px;
+}
+
+/*-----*/
+.banner {
+	position: relative;
+	display: flex;
+	align-items: center;
+	height: 320px;
+}
+
+.banner::after {
+	content: '';
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, .25);
+	backdrop-filter: blur(4px);
+}
+
+.banner set-bg {
+	background-position: center;
+}
+
+.banner__text {
+	position: relative;
+	width: 100%;
+	font-size: 14px;
+	text-transform: uppercase;
+	font-weight: 700;
+	letter-spacing: 4px;
+	color: white;
+	padding: 12px 20px;
+	z-index: 2;
+}
+
+.banner__text span {
+	font-size: 14px;
+	text-transform: uppercase;
+	font-weight: 700;
+	letter-spacing: 4px;
+	color: white;
+}
+
+.banner__text h2 {
+	font-size: 46px;
+	color: white;
+	line-height: 52px;
+	font-weight: 700;
+	margin: 10px 0;
+}
+
 .banner__text p {
+	color: white;
 	margin-bottom: 35px;
 }
 
@@ -1969,7 +2024,29 @@ ol {
 }
 
 .product__details__pic__item {
+	height: 450px;
 	margin-bottom: 20px;
+}
+
+.optional-pic
+{
+	display: block;
+	width: 120px;
+}
+
+.optional-pic__item {
+	position: relative;
+	width: 132px;
+	height: 132px;
+}
+
+.optional-pic__item.active::after {
+	content: '';
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	border: 5px solid #7fad39;
+	background-color: rgba(0, 0, 0, .05);
 }
 
 .product__details__pic__item img {

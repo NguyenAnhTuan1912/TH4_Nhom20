@@ -57,17 +57,9 @@
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
-                <li class="active"><a asp-controller="Home" asp-action="">Home</a></li>
-                <li><a asp-controller="Shop" asp-action="">Shop</a></li>
-                <li>
-                    <a href="#">Pages</a>
-                    <ul class="header__menu__dropdown">
-                        <li><a href="./checkout.html">Check Out</a></li>
-                        <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                    </ul>
-                </li>
-                <li><a asp-controller="Blog" asp-action="">Blog</a></li>
-                <li><a href="./contact.html">Contact</a></li>
+                <li><a asp-area="User" asp-controller="Home" asp-action="">Home</a></li>
+                <li><a asp-area="User" asp-controller="Shop" asp-action="">Shop</a></li>
+                <li><a asp-area="User" asp-controller="Contact" asp-action="">Contact</a></li>
             </ul>
         </nav>
         <div id="mobile-menu-wrap"></div>

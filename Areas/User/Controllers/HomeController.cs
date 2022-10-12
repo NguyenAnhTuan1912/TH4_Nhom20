@@ -21,6 +21,7 @@ namespace TH4_Nhom20.Controllers
         {
             IEnumerable<CameraModel> cameras = _db.CAMERA.ToList();
             ViewBag.Cameras = cameras;
+            ViewBag.AmountOfCamera = cameras.Count();
             return View();
         }
 

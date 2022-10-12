@@ -2,10 +2,12 @@
 @{
     ViewData["Title"] = "Detail";
     string[] features = @ViewBag.ChiTiet.CameraFeatures.Split(';');
+    string subtitle = @ViewBag.ChiTiet.Category.Equals("DSLR") ? "It's bulkier than others but is the coolest"
+    : @ViewBag.ChiTiet.Category.Equals("Compact") ? "The most compact kind of camera" : "Fast and Power";
 }
 
-<vc:big-banner Title="Vegetable's package"
-         SubTitle="Fresh and Green."></vc:big-banner>
+<vc:big-banner Title="Catching every moment"
+               SubTitle=@subtitle></vc:big-banner>
 
 <!-- Product Details Section Begin -->
 <section class="product-details spad">
@@ -14,8 +16,18 @@
             <div class="col-lg-6 col-md-6">
                 <div class="product__details__pic">
                     <div class="product__details__pic__item">
-                        <img class="product__details__pic__item--large"
+                        <img class="product__details__pic__item--large" id="main-pic"
                              src="~/@ViewBag.ChiTiet.ImageUrls.Split(';')[0]" alt="">
+                    </div>
+                </div>
+                <div class="product__details__pic--small me-5 d-flex flex-row justify-content-evenly">
+                    <div class="optional-pic__item d-flex align-items-center justify-content-center active">
+                        <img class="optional-pic"
+                             src="~/@ViewBag.ChiTiet.ImageUrls.Split(';')[0]" alt="">
+                    </div>
+                    <div class="optional-pic__item d-flex align-items-center justify-content-center">
+                        <img class="optional-pic"
+                             src="~/@ViewBag.ChiTiet.ImageUrls.Split(';')[1]" alt="">
                     </div>
                 </div>
             </div>

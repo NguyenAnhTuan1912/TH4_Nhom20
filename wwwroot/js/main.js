@@ -10,7 +10,6 @@
 'use strict';
 
 (function ($) {
-
     /*------------------
         Preloader
     --------------------*/
@@ -68,6 +67,21 @@
     $(".mobile-menu").slicknav({
         prependTo: '#mobile-menu-wrap',
         allowParentLinks: true
+    });
+
+    /*------------------
+        Detail image toggle
+    --------------------*/
+    $(".optional-pic__item").on('click', function (e) {
+        const { currentTarget } = e;
+        document.querySelectorAll(".optional-pic__item").forEach(item => {
+            if (item === currentTarget) {
+                item.classList.add('active');
+            } else {
+                item.classList.remove('active');
+            }
+        });
+        $('#main-pic').attr('src', currentTarget.querySelector('.optional-pic').src);
     });
 
     /*-----------------------
