@@ -27,12 +27,17 @@ namespace TH4_Nhom20.Controllers
             CartModel cart = new CartModel
             {
                 CameraId = cameraId,
-                Camera = _db.CAMERA.Include(camera => camera.Brand).Where(camera => camera.Id == cameraId).First(),
+                Camera = _db.CAMERA
+                .Include(camera => camera.Brand)
+                .Where(camera => camera.Id == cameraId)
+                .First(),
                 Amount = 1
             };
-            IEnumerable<CameraModel> cameras = _db.CAMERA.Where(camera => 
-            camera.Category == cart.Camera.Category && camera.BrandName == cart.Camera.BrandName &&
-            camera.Id != cameraId
+            IEnumerable<CameraModel> cameras = _db.CAMERA
+                .Where(camera => 
+                        camera.Category == cart.Camera.Category
+                        && camera.BrandName == cart.Camera.BrandName
+                        && camera.Id != cameraId
             );
             ViewBag.relatedCamera = cameras;
             ViewBag.Cart = cart;

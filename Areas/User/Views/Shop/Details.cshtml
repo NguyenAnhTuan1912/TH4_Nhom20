@@ -54,7 +54,10 @@
                             }
                         </ul>
                         <div class="product__details__quantity">
-                            <input class="form-control" type="number" asp-for="Amount" min="1" value="@ViewBag.Amount" onKeyDown="return false">
+                            <input class="form-control"
+                                type="number" asp-for="Amount"
+                                min="1" value="@ViewBag.Amount"
+                                onKeyDown="return false">
                         </div>
                         <button type="submit" class="primary-btn form-control">ADD TO CARD</button>
                         <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>

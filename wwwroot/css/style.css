@@ -812,6 +812,11 @@ ol {
 	padding-right: 20px;
 }
 
+.cart-item__info {
+	width: 250px;
+	max-width: 280px;
+}
+
 .cart-item__info p {
 	margin-bottom: 0;
 }
