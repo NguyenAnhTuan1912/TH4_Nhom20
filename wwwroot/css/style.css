@@ -762,6 +762,69 @@ ol {
 	position: relative;
 }
 
+.dropdown:hover .dropdown-menu {
+	display: block;
+	margin-top: 0;
+}
+
+.dropdown-menu {
+	padding-top: 0;
+	box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.dd-title {
+	width: 100%;
+	background-color: #7fad39;
+	border-radius: .25rem;
+	margin-bottom: 8px;
+	padding: 12px 0;
+}
+
+.dd-title p {
+	color: white;
+	margin-bottom: 0;
+}
+
+.dd-buttons {
+	margin-top: 8px;
+}
+
+.dd-buttons a:first-child {
+	margin-right: 8px;
+}
+
+.dd-buttons .primary-btn.cart-btn {
+	padding: 10px 28px;
+}
+
+.cart-subtotal {
+	text-align: right;
+}
+
+.dd-footer {
+
+	padding: 8px 20px 8px 20px;
+}
+
+.dropdown-menu .item {
+	width: 480px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.cart-item__info p {
+	margin-bottom: 0;
+}
+
+.dropdown-menu .item:not(.dropdown-menu .item:last-child, .dropdown-menu .item:first-child) {
+	border-bottom: 1px solid rgba(0, 0, 0, .125);
+}
+
+.cart-item__image {
+	width: 120px;
+	margin-left: 12px;
+}
+
 .header__cart ul li a i {
 	font-size: 18px;
 	color: #1c1c1c;
@@ -2094,9 +2157,9 @@ ol {
 }
 
 .product__details__text .primary-btn {
-	padding: 16px 28px 14px;
-	margin-right: 6px;
-	margin-bottom: 5px;
+	height: fit-content;
+	padding: 20px 0;
+	margin: 15px 0;
 }
 
 .product__details__text .heart-icon {
@@ -2271,14 +2334,15 @@ ol {
 }
 
 .shoping__cart__table table thead tr {
+	background-color: #7fad39;
 	border-bottom: 1px solid #ebebeb;
 }
 
 .shoping__cart__table table thead th {
 	font-size: 20px;
 	font-weight: 700;
-	color: #1c1c1c;
-	padding-bottom: 20px;
+	color: white;
+	vertical-align: middle;
 }
 
 .shoping__cart__table table thead th.shoping__product {
@@ -2297,6 +2361,7 @@ ol {
 }
 
 .shoping__cart__table table tbody tr td.shoping__cart__item img {
+	width: 180px;
 	display: inline-block;
 	margin-right: 25px;
 }
@@ -2321,7 +2386,7 @@ ol {
 }
 
 .shoping__cart__table table tbody tr td.shoping__cart__item__close {
-	text-align: right;
+	text-align: center;
 }
 
 .shoping__cart__table table tbody tr td.shoping__cart__item__close span {

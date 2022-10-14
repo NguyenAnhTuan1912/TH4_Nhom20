@@ -1,131 +1,129 @@
-﻿@model OtherBannerModel;
+﻿@model CartModel;
 @{
     ViewData["Title"] = "Detail";
-    string[] features = @ViewBag.ChiTiet.CameraFeatures.Split(';');
-    string subtitle = @ViewBag.ChiTiet.Category.Equals("DSLR") ? "It's bulkier than others but is the coolest"
-    : @ViewBag.ChiTiet.Category.Equals("Compact") ? "The most compact kind of camera" : "Fast and Power";
+    string[] features = @ViewBag.Cart.Camera.Features.Split(';');
+    string subtitle = @ViewBag.Cart.Camera.Category.Equals("DSLR") ? "It's bulkier than others but is the coolest"
+    : @ViewBag.Cart.Camera.Category.Equals("Compact") ? "The most compact kind of camera" : "Fast and Power";
 }
 
 <vc:big-banner Title="Catching every moment"
                SubTitle=@subtitle></vc:big-banner>
 
 <!-- Product Details Section Begin -->
-<section class="product-details spad">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 col-md-6">
-                <div class="product__details__pic">
-                    <div class="product__details__pic__item">
-                        <img class="product__details__pic__item--large" id="main-pic"
-                             src="~/@ViewBag.ChiTiet.ImageUrls.Split(';')[0]" alt="">
-                    </div>
-                </div>
-                <div class="product__details__pic--small me-5 d-flex flex-row justify-content-evenly">
-                    <div class="optional-pic__item d-flex align-items-center justify-content-center active">
-                        <img class="optional-pic"
-                             src="~/@ViewBag.ChiTiet.ImageUrls.Split(';')[0]" alt="">
-                    </div>
-                    <div class="optional-pic__item d-flex align-items-center justify-content-center">
-                        <img class="optional-pic"
-                             src="~/@ViewBag.ChiTiet.ImageUrls.Split(';')[1]" alt="">
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6">
-                <div class="product__details__text">
-                    <h3>@ViewBag.ChiTiet.CameraName</h3>
-                    <div class="product__details__rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star-half-o"></i>
-                        <span>(18 reviews)</span>
-                    </div>
-                    <div class="product__details__price">@ViewBag.ChiTiet.CameraPrice đ</div>
-                    <p>
-                        <span style="margin-right: 6px"><strong>Brand:</strong> @ViewBag.ChiTiet.BrandName</span>
-                        <span><strong>Category:</strong> @ViewBag.ChiTiet.Category</span>
-                    </p>
-                    <ul>
-                        @for(int i = 0; i < 3; i++) {
-                            <li>@features[i]</li>
-                        }
-                    </ul>
-                    <div class="product__details__quantity">
-                        <div class="quantity">
-                            <div class="pro-qty">
-                                <input type="text" value="1">
-                            </div>
+<form method="post" action="">
+    <section class="product-details spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="product__details__pic">
+                        <div class="product__details__pic__item">
+                            <img class="product__details__pic__item--large" id="main-pic"
+                                 src="~/@ViewBag.Cart.Camera.ImageUrls.Split(';')[0]" alt="">
                         </div>
                     </div>
-                    <a href="#" class="primary-btn">ADD TO CARD</a>
-                    <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
-                    <ul>
-                        <li><b>Availability</b> <span>In Stock</span></li>
-                        <li><b>Shipping</b> <span>01 day shipping. <samp>Free pickup today</samp></span></li>
-                        <li><b>Weight</b> <span>0.5 kg</span></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-12">
-                <div class="product__details__tab">
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tabs-1" role="tab"
-                                aria-selected="true">Description</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab"
-                                aria-selected="false">Information</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
-                                aria-selected="false">Reviews <span>(1)</span></a>
-                        </li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="tabs-1" role="tabpanel">
-                            <div class="product__details__tab__desc">
-                                <h6>Product Description</h6>
-                                <p>@ViewBag.ChiTiet.CameraIntroduction</p>
-                            </div>
+                    <div class="product__details__pic--small me-5 d-flex flex-row justify-content-evenly">
+                        <div class="optional-pic__item d-flex align-items-center justify-content-center active">
+                            <img class="optional-pic"
+                                 src="~/@ViewBag.Cart.Camera.ImageUrls.Split(';')[0]" alt="">
                         </div>
-                        <div class="tab-pane active" id="tabs-2" role="tabpanel">
-                            <div class="product__details__tab__desc">
-                                <h6>Product Infomation</h6>
-                                <table>
-                                    <tr style="background-color: #7fad39; color: white; border: 1px solid #7fad39;">
-                                        <th colspan="2">Feature</th>
-                                    </tr>
-                                    @foreach(var feature in features) {
-                                        string[] singleFeatureInfo = feature.Split(':');
-                                        if (singleFeatureInfo.Length == 1)
-                                        {
-                                            <tr>
-                                                <td colspan="2">@singleFeatureInfo[0]</td>
-                                            </tr>
-                                        } else {
-                                            <tr>
-                                                <td>@singleFeatureInfo[0]</td>
-                                                <td>@singleFeatureInfo[1]</td>
-                                            </tr>
+                        <div class="optional-pic__item d-flex align-items-center justify-content-center">
+                            <img class="optional-pic"
+                                 src="~/@ViewBag.Cart.Camera.ImageUrls.Split(';')[1]" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="product__details__text">
+                        <h3>@ViewBag.Cart.Camera.Name</h3>
+                        <div class="product__details__rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-half-o"></i>
+                            <span>(18 reviews)</span>
+                        </div>
+                        <div class="product__details__price">@String.Format("{0:0,0} đ", int.Parse(ViewBag.Cart.Camera.Price))</div>
+                        <p>
+                            <span style="margin-right: 6px"><strong>Brand:</strong> @ViewBag.Cart.Camera.BrandName</span>
+                            <span><strong>Category:</strong> @ViewBag.Cart.Camera.Category</span>
+                        </p>
+                        <ul>
+                            @for(int i = 0; i < 3; i++) {
+                                <li>@features[i]</li>
+                            }
+                        </ul>
+                        <div class="product__details__quantity">
+                            <input class="form-control" type="number" asp-for="Amount" min="1" value="@ViewBag.Amount" onKeyDown="return false">
+                        </div>
+                        <button type="submit" class="primary-btn form-control">ADD TO CARD</button>
+                        <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
+                        <ul>
+                            <li><b>Availability</b> <span>In Stock</span></li>
+                            <li><b>Shipping</b> <span>01 day shipping. <samp>Free pickup today</samp></span></li>
+                            <li><b>Weight</b> <span>0.5 kg</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="product__details__tab">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#tabs-1" role="tab"
+                                    aria-selected="true">Description</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab"
+                                    aria-selected="false">Information</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
+                                    aria-selected="false">Reviews <span>(1)</span></a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                                <div class="product__details__tab__desc">
+                                    <h6>Product Description</h6>
+                                    <p>@ViewBag.Cart.Camera.Introduction</p>
+                                </div>
+                            </div>
+                            <div class="tab-pane active" id="tabs-2" role="tabpanel">
+                                <div class="product__details__tab__desc">
+                                    <h6>Product Infomation</h6>
+                                    <table>
+                                        <tr style="background-color: #7fad39; color: white; border: 1px solid #7fad39;">
+                                            <th colspan="2">Feature</th>
+                                        </tr>
+                                        @foreach(var feature in features) {
+                                            string[] singleFeatureInfo = feature.Split(':');
+                                            if (singleFeatureInfo.Length == 1)
+                                            {
+                                                <tr>
+                                                    <td colspan="2">@singleFeatureInfo[0]</td>
+                                                </tr>
+                                            } else {
+                                                <tr>
+                                                    <td>@singleFeatureInfo[0]</td>
+                                                    <td>@singleFeatureInfo[1]</td>
+                                                </tr>
+                                            }
                                         }
-                                    }
-                                </table>
+                                    </table>
+                                </div>
                             </div>
-                        </div>
-                        <div class="tab-pane active" id="tabs-3" role="tabpanel">
-                            <div class="product__details__tab__desc">
-                                <h6>Products Infomation</h6>
+                            <div class="tab-pane active" id="tabs-3" role="tabpanel">
+                                <div class="product__details__tab__desc">
+                                    <h6>Products Infomation</h6>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+</form>
 <!-- Product Details Section End -->
 <!-- Related Product Section Begin -->
 <section class="related-product">
@@ -150,7 +148,7 @@
                         </div>
                         <div class="product__item__text">
                             <h6><a href="#">@item.Name</a></h6>
-                            <h5>@item.Price</h5>
+                            <h5>@String.Format("{0:0,0} đ", int.Parse(item.Price))</h5>
                         </div>
                     </div>
                 </div>

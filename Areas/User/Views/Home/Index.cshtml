@@ -10,7 +10,7 @@
             <span>GREATEST CAMERA</span>
             <h2>Camera <br />100% Quality</h2>
             <p>Free Pickup and Delivery Available</p>
-            <a href="#" class="primary-btn">SHOP NOW</a>
+            <a href="User/Shop/" class="primary-btn">SHOP NOW</a>
         </div>
     </div>
 </div>
@@ -23,7 +23,7 @@
                 @foreach(var item in ViewBag.Cameras) {
                     <div class="col-lg-3">
                         <div class="categories__item set-bg" data-setbg="@item.ImageUrls.Split(';')[0]">
-                            <h5><a href="User/Shop/Details/@item.Id">@item.Name</a></h5>
+                            <h5><a href="User/Shop/Details/?cameraId=@item.Id">@item.Name</a></h5>
                         </div>
                     </div>
                 }
@@ -63,8 +63,8 @@
                             </ul>
                         </div>
                         <div class="featured__item__text">
-                            <h6><a href="User/Shop/Details/@item.Id">@item.Name>@item.Name</a></h6>
-                            <h5>@item.Price đ</h5>
+                            <h6><a href="User/Shop/Details/?cameraId=@item.Id">@item.Name>@item.Name</a></h6>
+                            <h5>@String.Format("{0:0,0} đ", item.Price)</h5>
                         </div>
                     </div>
                 </div>
@@ -116,13 +116,13 @@
                                 @for (int j = start; j < start + 3; j++)
                                 {
                                     if (j >= amountOfCameras) break;
-                                    <a href="User/Shop/Details/@ViewBag.Cameras[j].Id" class="latest-product__item">
+                                    <a href="User/Shop/Details/?cameraId=@ViewBag.Cameras[j].Id" class="latest-product__item">
                                         <div class="latest-product__item__pic">
                                             <img src="~/@ViewBag.Cameras[j].ImageUrls.Split(';')[0]" alt="">
                                         </div>
                                         <div class="latest-product__item__text">
                                             <h6>@ViewBag.Cameras[j].Name</h6>
-                                            <span>@ViewBag.Cameras[j].Price đ</span>
+                                            <span>@String.Format("{0:0,0} đ", ViewBag.Cameras[j].Price)</span>
                                         </div>
                                     </a>
                                 }
@@ -144,13 +144,13 @@
                                 @for (int j = start; j < start + 3; j++)
                                 {
                                     if (j >= amountOfCameras) break;
-                                    <a href="User/Shop/Details/@ViewBag.Cameras[j].Id" class="latest-product__item">
+                                    <a href="User/Shop/Details/?cameraId=@ViewBag.Cameras[j].Id" class="latest-product__item">
                                         <div class="latest-product__item__pic">
                                             <img src="~/@ViewBag.Cameras[j].ImageUrls.Split(';')[0]" alt="">
                                         </div>
                                         <div class="latest-product__item__text">
                                             <h6>@ViewBag.Cameras[j].Name</h6>
-                                            <span>@ViewBag.Cameras[j].Price đ</span>
+                                            <span>@String.Format("{0:0,0} đ", ViewBag.Cameras[j].Price)</span>
                                         </div>
                                     </a>
                                 }
@@ -172,13 +172,13 @@
                                 @for (int j = start; j < start + 3; j++)
                                 {
                                     if (j >= amountOfCameras) break;
-                                    <a href="User/Shop/Details/@ViewBag.Cameras[j].Id" class="latest-product__item">
+                                    <a href="User/Shop/Details/?cameraId=@ViewBag.Cameras[j].Id" class="latest-product__item">
                                         <div class="latest-product__item__pic">
                                             <img src="~/@ViewBag.Cameras[j].ImageUrls.Split(';')[0]" alt="">
                                         </div>
                                         <div class="latest-product__item__text">
                                             <h6>@ViewBag.Cameras[j].Name</h6>
-                                            <span>@ViewBag.Cameras[j].Price đ</span>
+                                            <span>@String.Format("{0:0,0} đ", ViewBag.Cameras[j].Price)</span>
                                         </div>
                                     </a>
                                 }
