@@ -2,7 +2,7 @@
 {
     public class CartViewModel
     {
-        public IEnumerable<CartModel> Carts { get; set; }
-        public double Subtotal { get; set; }
+        public IEnumerable<CartModel> CartList { get; set; }
+        public OrderModel Order { get; set; }
     }
 }

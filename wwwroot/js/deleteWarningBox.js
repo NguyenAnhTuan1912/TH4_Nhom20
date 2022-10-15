@@ -1,23 +1,26 @@
-﻿function deleteRecord(id, row) {
+﻿function deleteRecord(row, url) {
     $.ajax({
-        url: `Cameras/Delete/${id}`,
+        url: `${url}`,
         type: 'POST'
     }).done(() => {
         row.closest('tr').remove();
     });
 }
 
-$('.delete-button').on('click', (e) => {
-    const { target } = e;
-    swal({
-        title: "Bán có chắc không?",
-        text: "Một khi bạn xoá sản phẩm này, thì mọi dữ liệu của nó sẽ biến mất vĩnh viễn.",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true
-    }).then(value => {
-        if (value) deleteRecord(target.getAttribute('data-itemid'), target);
-        else return;
-    });
-});
+const showDeleteWarningBox = (function () {
+    return function(e) {
+        const { currentTarget } = e;
+        swal({
+            title: "Bán có chắc không?",
+            text: currentTarget.getAttribute('data-message'),
+            icon: "warning",
+            buttons: true,
+            dangerMode: true
+        }).then(value => {
+            if (value) deleteRecord(currentTarget, currentTarget.getAttribute('data-delete-action'));
+            else return;
+        });
+    }
+})();
 
+$('.delete-button').on('click', showDeleteWarningBox);

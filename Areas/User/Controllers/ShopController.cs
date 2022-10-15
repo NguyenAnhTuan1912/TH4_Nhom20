@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Versioning;
+using System.Collections.Immutable;
 using System.Security.Claims;
 using TH4_Nhom20.Data;
 using TH4_Nhom20.Models;
@@ -21,7 +23,6 @@ namespace TH4_Nhom20.Controllers
             return View();
         }
 
-        [HttpGet]
         public IActionResult Details(int cameraId)
         {
             CartModel cart = new CartModel
@@ -64,28 +65,6 @@ namespace TH4_Nhom20.Controllers
             }
             _db.SaveChanges();
             return RedirectToAction("Cart");
-        }
-
-        [Authorize]
-        public IActionResult Cart()
-        {
-            var identity = (ClaimsIdentity)User.Identity;
-            var claim = identity.FindFirst(ClaimTypes.NameIdentifier);
-
-            CartViewModel carts = new CartViewModel()
-            {
-                Carts = _db.CART
-                .Include("Camera")
-                .Where(c => c.UserId == claim.Value)
-                .ToList()
-
-            };
-            foreach(CartModel cart in carts.Carts)
-            {
-                cart.ProductPrice = cart.Amount * int.Parse(cart.Camera.Price);
-            }
-            ViewBag.Carts = carts.Carts;
-            return View();
         }
     }
 }

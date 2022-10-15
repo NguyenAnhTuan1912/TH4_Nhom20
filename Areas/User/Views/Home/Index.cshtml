@@ -10,7 +10,7 @@
             <span>GREATEST CAMERA</span>
             <h2>Camera <br />100% Quality</h2>
             <p>Free Pickup and Delivery Available</p>
-            <a href="User/Shop/" class="primary-btn">SHOP NOW</a>
+            <a href="/User/Shop" class="primary-btn">SHOP NOW</a>
         </div>
     </div>
 </div>
@@ -58,13 +58,11 @@
                         <div class="featured__item__pic set-bg" data-setbg="@item.ImageUrls.Split(';')[0]">
                             <ul class="featured__item__pic__hover">
                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                             </ul>
                         </div>
                         <div class="featured__item__text">
-                            <h6><a href="User/Shop/Details/?cameraId=@item.Id">@item.Name>@item.Name</a></h6>
-                            <h5>@String.Format("{0:0,0} đ", item.Price)</h5>
+                            <h6><a href="User/Shop/Details/?cameraId=@item.Id">@item.Name</a></h6>
+                            <h5>@String.Format("{0:0,0} đ", int.Parse(item.Price))</h5>
                         </div>
                     </div>
                 </div>
@@ -122,7 +120,7 @@
                                         </div>
                                         <div class="latest-product__item__text">
                                             <h6>@ViewBag.Cameras[j].Name</h6>
-                                            <span>@String.Format("{0:0,0} đ", ViewBag.Cameras[j].Price)</span>
+                                            <span>@String.Format("{0:0,0} đ", int.Parse(ViewBag.Cameras[j].Price))</span>
                                         </div>
                                     </a>
                                 }
@@ -150,7 +148,7 @@
                                         </div>
                                         <div class="latest-product__item__text">
                                             <h6>@ViewBag.Cameras[j].Name</h6>
-                                            <span>@String.Format("{0:0,0} đ", ViewBag.Cameras[j].Price)</span>
+                                            <span>@String.Format("{0:0,0} đ", int.Parse(ViewBag.Cameras[j].Price))</span>
                                         </div>
                                     </a>
                                 }
@@ -178,7 +176,7 @@
                                         </div>
                                         <div class="latest-product__item__text">
                                             <h6>@ViewBag.Cameras[j].Name</h6>
-                                            <span>@String.Format("{0:0,0} đ", ViewBag.Cameras[j].Price)</span>
+                                            <span>@String.Format("{0:0,0} đ", int.Parse(ViewBag.Cameras[j].Price))</span>
                                         </div>
                                     </a>
                                 }

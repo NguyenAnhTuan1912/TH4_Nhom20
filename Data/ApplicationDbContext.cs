@@ -15,5 +15,7 @@ namespace TH4_Nhom20.Data
         public DbSet<ImageModel> IMAGE { get; set; }
         public DbSet<UserModel> USER { get; set; }
         public DbSet<CartModel> CART { get; set; }
+        public DbSet<OrderModel> ORDER { get; set; }
+        public DbSet<OrderDetailsModel> ORDERDETAILS { get; set; }
     }
 }

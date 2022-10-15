@@ -39,7 +39,7 @@
     <None Include="Areas\User\Views\Contact\Index.cshtml" />
     <None Include="Areas\User\Views\Home\Index.cshtml" />
     <None Include="Areas\User\Views\Home\Privacy.cshtml" />
-    <None Include="Areas\User\Views\Shop\Cart.cshtml" />
+    <None Include="Areas\User\Views\Cart\Index.cshtml" />
     <None Include="Areas\User\Views\Shop\Details.cshtml" />
     <None Include="Areas\User\Views\Shop\Index.cshtml" />
     <None Include="Areas\Admin\Views\Shared\_AdminAddInputFileTagPartial.cshtml" />

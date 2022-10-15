@@ -24,19 +24,21 @@ namespace TH4_Nhom20.ViewComponents
             {
                 return View("Default");
             }
-            CartViewModel carts = new CartViewModel()
+            CartViewModel cart = new CartViewModel()
             {
-                Carts = _db.CART
+                CartList = _db.CART
                 .Include("Camera")
                 .Where(c => c.UserId == claim.Value)
                 .ToList()
             };
-            foreach(CartModel cart in carts.Carts)
+            double Subtotal = 0;
+            foreach(CartModel c in cart.CartList)
             {
-                carts.Subtotal += cart.Amount * int.Parse(cart.Camera.Price);
+                c.ProductPrice += c.Amount * int.Parse(c.Camera.Price);
+                Subtotal += c.ProductPrice;
             }
-            ViewBag.Carts = carts.Carts;
-            ViewBag.Subtotal = carts.Subtotal;
+            ViewBag.Carts = cart.CartList;
+            ViewBag.Subtotal = Subtotal;
             return View("Default");
         }
     }

@@ -39,7 +39,9 @@
                                 Chỉnh sửa
                             </a>
                             |
-                            <a data-itemid=@camera.Id
+                            <a
+                                data-delete-action="/Admin/Cameras/Delete/@camera.Id"
+                                data-message="Một khi bạn xoá sản phẩm này, thì mọi dữ liệu của nó sẽ biến mất vĩnh viễn!"
                                 class="btn btn-danger delete-button">
                                 Xoá
                             </a>

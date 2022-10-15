@@ -10,7 +10,7 @@
                SubTitle=@subtitle></vc:big-banner>
 
 <!-- Product Details Section Begin -->
-<form method="post" action="">
+<form method="post" action="/User/Cart/Add/?CameraId=@ViewBag.Cart.CameraId">
     <section class="product-details spad">
         <div class="container">
             <div class="row">
@@ -54,10 +54,13 @@
                             }
                         </ul>
                         <div class="product__details__quantity">
-                            <input class="form-control"
-                                type="number" asp-for="Amount"
-                                min="1" value="@ViewBag.Amount"
-                                onKeyDown="return false">
+                            <div class="pro-qty">
+                                <input 
+                                    type="number" value="1"
+                                    asp-for="Amount"
+                                    min="1" value="@(ViewBag.Amount == null ? 1 : ViewBag.Amount)"
+                                    onKeyDown="return false">
+                            </div>
                         </div>
                         <button type="submit" class="primary-btn form-control">ADD TO CARD</button>
                         <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>

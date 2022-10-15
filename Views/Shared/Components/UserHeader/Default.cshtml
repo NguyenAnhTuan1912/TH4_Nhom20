@@ -1,11 +1,62 @@
 ﻿@{
     string currentControllerName = ViewContext.RouteData.Values["controller"].ToString();
+    string currentActionName = ViewContext.RouteData.Values["Action"].ToString();
     string isHomeShowing = currentControllerName.Equals("Home") ? "active" : "";
     string isShopShowing = currentControllerName.Equals("Shop") ? "active" : "";
+    string isCheckoutShowing = currentActionName.Equals("Checkout") ? "active" : "";
     string isContactShowing = currentControllerName.Equals("Contact") ? "active" : "";
 }
 
 @model CartModel;
+<!-- Humberger Begin -->
+<div class="humberger__menu__overlay"></div>
+<div class="humberger__menu__wrapper">
+    <div class="humberger__menu__logo">
+        <a asp-controller="Home" asp-action=""><img src="~/img/logo.png" alt=""></a>
+    </div>
+    <div class="humberger__menu__cart">
+        <ul>
+            <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
+            <li><a asp-action="Shop"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+        </ul>
+        <div class="header__cart__price">item(s): <span>@(ViewBag.Subtotal == null ? "0 đ" : String.Format("{0:0,0} đ", ViewBag.Subtotal))</span></div>
+    </div>
+    <div class="humberger__menu__widget">
+        <div class="header__top__right__language">
+            <img src="~/img/language.png" alt="">
+            <div>English</div>
+            <span class="arrow_carrot-down"></span>
+            <ul>
+                <li><a href="#">Spanis</a></li>
+                <li><a href="#">English</a></li>
+            </ul>
+        </div>
+        <div class="header__top__right__auth">
+            <partial name="~/Views/Shared/_LoginPartial.cshtml" />
+        </div>
+    </div>
+    <nav class="humberger__menu__nav mobile-menu">
+        <ul>
+            <li><a asp-area="User" asp-controller="Home" asp-action="">Home</a></li>
+            <li><a asp-area="User" asp-controller="Shop" asp-action="">Shop</a></li>
+            <li><a asp-area="User" asp-controller="Cart" asp-action="Checkout">Checkout</a></li>
+            <li><a asp-area="User" asp-controller="Contact" asp-action="">Contact</a></li>
+        </ul>
+    </nav>
+    <div id="mobile-menu-wrap"></div>
+    <div class="header__top__right__social">
+        <a href="#"><i class="fa fa-facebook"></i></a>
+        <a href="#"><i class="fa fa-twitter"></i></a>
+        <a href="#"><i class="fa fa-linkedin"></i></a>
+        <a href="#"><i class="fa fa-pinterest-p"></i></a>
+    </div>
+    <div class="humberger__menu__contact">
+        <ul>
+            <li>Free Shipping for all Order of $99</li>
+        </ul>
+    </div>
+</div>
+<!-- Humberger End -->
 <!-- Header Section Begin -->
 <header class="header">
     <div class="header__top">
@@ -55,6 +106,7 @@
                     <ul>
                         <li class=@isHomeShowing><a asp-area="User" asp-controller="Home" asp-action="">Home</a></li>
                         <li class=@isShopShowing><a asp-area="User" asp-controller="Shop" asp-action="">Shop</a></li>
+                        <li class=@isCheckoutShowing><a asp-area="User" asp-controller="Cart" asp-action="Checkout">Checkout</a></li>
                         <li class=@isContactShowing><a asp-area="User" asp-controller="Contact" asp-action="">Contact</a></li>
                     </ul>
                 </nav>
@@ -64,40 +116,46 @@
                     <ul>
                         <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
                         <li class="dropdown">
-                            <a asp-controller="Shop" asp-action="Cart"><i class="fa fa-shopping-cart"></i> <span>@(ViewBag.Carts.Count == null ? 0 : ViewBag.Carts.Count)</span></a>
+                            <a asp-area="User" asp-controller="Cart" asp-action=""><i class="fa fa-shopping-cart"></i> <span>@(ViewBag.Carts == null ? 0 : ViewBag.Carts.Count)</span></a>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <div class="dd-title d-flex align-items-center justify-content-center">
                                     <p>Preview Cart</p>
                                 </div>
-                                @foreach (CartModel item in ViewBag.Carts) {
-                                    <div class="item d-flex flex-row align-items-center justify-content-between p-2">
-                                        <a href="User/Shop/Details/?cameraId=@item.Camera.Id">
-                                            <div class="d-flex flex-row align-items-center">
-                                                <div class="cart-item__info">
-                                                    <p>@item.Camera.Name</p>
-                                                    <p>@item.Amount x @String.Format("{0:0,0}", int.Parse(item.Camera.Price))</p>
+                                @if (ViewBag.Carts == null)
+                                {
+                                    <p class="unsignedin-user">Đăng nhập <a href="/Identity/Account/Login">tại đây</a> để thêm sản phẩm vào giỏ hàng</p>
+                                } else {
+                                    @foreach (CartModel item in ViewBag.Carts)
+                                    {
+                                        <div class="item d-flex flex-row align-items-center justify-content-between p-2">
+                                            <a href="User/Shop/Details/?cameraId=@item.Camera.Id">
+                                                <div class="d-flex flex-row align-items-center">
+                                                    <div class="cart-item__info">
+                                                        <p>@item.Camera.Name</p>
+                                                        <p>@item.Amount x @String.Format("{0:0,0}", int.Parse(item.Camera.Price))</p>
+                                                    </div>
+                                                    <div class="cart-item__image">
+                                                        <img src="~/@item.Camera.ImageUrls.Split(';')[0]" />
+                                                    </div>
                                                 </div>
-                                                <div class="cart-item__image">
-                                                    <img src="~/@item.Camera.ImageUrls.Split(';')[0]" />
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <button class="btn"><span class="icon_close"></span></button>
-                                    </div>
+                                            </a>
+                                            <button class="btn"><span class="icon_close"></span></button>
+                                        </div>
+                                    }
                                 }
                                 <div class="dd-footer">
                                     <div class="cart-subtotal">
-                                        <p><strong>Total: </strong>@String.Format("{0:0,0} đ", ViewBag.Subtotal)</p>
+                                        <p><strong>Total: </strong>@(ViewBag.Subtotal == null ? "0 đ" : String.Format("{0:0,0} đ", ViewBag.Subtotal))</p>
                                     </div>
                                     <div class="dd-buttons d-flex flex-row align-items-center justify-content-end">
-                                        <a href="User/Shop/Cart" class="primary-btn">View Cart</a>
-                                        <a href="User/Shop/Checkout" class="primary-btn cart-btn">Checkout</a>
+                                        <a href="User/Cart" class="primary-btn">View Cart</a>
+                                        <a href="User/Cart/Checkout" class="primary-btn cart-btn">Checkout</a>
                                     </div>
                                 </div>
                             </div>
                         </li>
                     </ul>
-                    <div class="header__cart__price">item(s): <span>@String.Format("{0:0,0} đ", ViewBag.Subtotal)</span></div>
+                    <div class="header__cart__price">item(s): <span>@(ViewBag.Subtotal == null ? "0 đ" : String.Format("{0:0,0} đ", ViewBag.Subtotal))</span></div>
                 </div>
             </div>
         </div>
