@@ -131,5 +131,40 @@ namespace TH4_Nhom20.Areas.User.Controllers
             ViewBag.Cart = cart;
             return View();
         }
+
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public IActionResult Checkout(CartViewModel cart)
+        {
+            var identity = (ClaimsIdentity)User.Identity;
+            var claim = identity.FindFirst(ClaimTypes.NameIdentifier);
+            cart.CartList = _db.CART
+                .Include("Camera")
+                .Where(c => c.UserId == claim.Value).ToList();
+            cart.Order.UserId = claim.Value;
+            cart.Order.OrderDate = DateTime.Now;
+            cart.Order.OrderStatus = "Đang xác nhận";
+            foreach (var c in cart.CartList)
+            {
+                c.ProductPrice = int.Parse(c.Camera.Price) * c.Amount;
+                cart.Order.Subtotal += c.ProductPrice;
+            }
+            _db.ORDER.Add(cart.Order);
+            _db.SaveChanges();
+            foreach(var c in cart.CartList)
+            {
+                _db.ORDERDETAILS.Add(new OrderDetailsModel()
+                {
+                    CameraId = c.CameraId,
+                    OrderId = cart.Order.Id,
+                    ProductPrice = c.ProductPrice,
+                    Amount = c.Amount,
+                });
+            }
+            _db.CART.RemoveRange(cart.CartList);
+            _db.SaveChanges();
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

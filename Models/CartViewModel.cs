@@ -1,4 +1,6 @@
-﻿namespace TH4_Nhom20.Models
+﻿using Microsoft.Build.Framework;
+
+namespace TH4_Nhom20.Models
 {
     public class CartViewModel
     {

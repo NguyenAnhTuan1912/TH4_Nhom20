@@ -15,8 +15,11 @@ namespace TH4_Nhom20.Models
         public double Subtotal { get; set; }
         public DateTime OrderDate { get; set; }
         public string? OrderStatus { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
         public string PhoneNumber { get; set; }
+        [Required]
         public string Address { get; set; }
     }
 }

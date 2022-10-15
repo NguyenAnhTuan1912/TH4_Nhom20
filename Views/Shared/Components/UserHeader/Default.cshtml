@@ -4,6 +4,8 @@
     string isHomeShowing = currentControllerName.Equals("Home") ? "active" : "";
     string isShopShowing = currentControllerName.Equals("Shop") ? "active" : "";
     string isCheckoutShowing = currentActionName.Equals("Checkout") ? "active" : "";
+    string isOrderShowing = currentControllerName.Equals("Order")
+    || currentControllerName.Equals("Order") && currentActionName.Equals("Details") ? "active" : "";
     string isContactShowing = currentControllerName.Equals("Contact") ? "active" : "";
 }
 
@@ -40,6 +42,7 @@
             <li><a asp-area="User" asp-controller="Home" asp-action="">Home</a></li>
             <li><a asp-area="User" asp-controller="Shop" asp-action="">Shop</a></li>
             <li><a asp-area="User" asp-controller="Cart" asp-action="Checkout">Checkout</a></li>
+            <li><a asp-area="User" asp-controller="Order" asp-action="">Your Orders</a></li>
             <li><a asp-area="User" asp-controller="Contact" asp-action="">Contact</a></li>
         </ul>
     </nav>
@@ -96,17 +99,18 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-lg-3">
+            <div class="col-lg-2">
                 <div class="header__logo">
                     <a asp-area="User" asp-controller="Home" asp-action=""><img src="~/img/logo.png" alt=""></a>
                 </div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-7">
                 <nav class="header__menu">
                     <ul>
                         <li class=@isHomeShowing><a asp-area="User" asp-controller="Home" asp-action="">Home</a></li>
                         <li class=@isShopShowing><a asp-area="User" asp-controller="Shop" asp-action="">Shop</a></li>
                         <li class=@isCheckoutShowing><a asp-area="User" asp-controller="Cart" asp-action="Checkout">Checkout</a></li>
+                        <li class=@isOrderShowing><a asp-area="User" asp-controller="Order" asp-action="">Your Orders</a></li>
                         <li class=@isContactShowing><a asp-area="User" asp-controller="Contact" asp-action="">Contact</a></li>
                     </ul>
                 </nav>
@@ -145,17 +149,17 @@
                                 }
                                 <div class="dd-footer">
                                     <div class="cart-subtotal">
-                                        <p><strong>Total: </strong>@(ViewBag.Subtotal == null ? "0 đ" : String.Format("{0:0,0} đ", ViewBag.Subtotal))</p>
+                                        <p><strong>Total: </strong>@(ViewBag.Subtotal == 0 ? "0 đ" : String.Format("{0:0,0} đ", ViewBag.Subtotal))</p>
                                     </div>
                                     <div class="dd-buttons d-flex flex-row align-items-center justify-content-end">
-                                        <a href="User/Cart" class="primary-btn">View Cart</a>
-                                        <a href="User/Cart/Checkout" class="primary-btn cart-btn">Checkout</a>
+                                        <a href="/User/Cart" class="primary-btn">View Cart</a>
+                                        <a href="/User/Cart/Checkout" class="primary-btn cart-btn">Checkout</a>
                                     </div>
                                 </div>
                             </div>
                         </li>
                     </ul>
-                    <div class="header__cart__price">item(s): <span>@(ViewBag.Subtotal == null ? "0 đ" : String.Format("{0:0,0} đ", ViewBag.Subtotal))</span></div>
+                    <div class="header__cart__price">item(s): <span>@(ViewBag.Subtotal == 0 ? "0 đ" : String.Format("{0:0,0} đ", ViewBag.Subtotal))</span></div>
                 </div>
             </div>
         </div>

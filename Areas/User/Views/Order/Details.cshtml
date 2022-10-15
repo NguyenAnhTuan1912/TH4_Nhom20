@@ -1,0 +1,63 @@
+﻿@model OrderDetailsModel
+
+<vc:big-banner Title="Your Order Details"
+               SubTitle="Tracking your orders, where it went and when it come."></vc:big-banner>
+<div class="mt-4">
+    <h2 class="mb-3"><strong>You product in order</strong></h2>
+    <div class="information">
+        <h4 class="mb-3"><strong>Order Information</strong></h4>
+        <div class="row">
+            <div class="col-lg-4">
+                <p>
+                    <strong>Name:</strong> <span>@ViewBag.Order.Name</span>
+                </p>
+                <p>
+                    <strong>Phone number:</strong> <span>@ViewBag.Order.PhoneNumber</span>
+                </p>
+                <p>
+                    <strong>Address:</strong> <span>@ViewBag.Order.Address</span>
+                </p>
+            </div>
+            <div class="col-lg-8">
+                <p>
+                    <strong>Checkout at:</strong> <span>@ViewBag.Order.OrderDate</span>
+                </p>
+                <p>
+                    <strong>Status:</strong> <span>@ViewBag.Order.OrderStatus</span>
+                </p>
+                <p>
+                    <strong>Total:</strong> <span>@String.Format("{0:0,0} đ", ViewBag.Order.Subtotal)</span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="information">
+        <h4 class="mb-3"><strong>Cameras Information</strong></h4>
+        <div class="row">
+            @foreach(OrderDetailsModel o in ViewBag.OrderDetailList) {
+                <div class="my-3">
+                    <div class="col-lg-4">
+                        <div>
+                            <img src="~/@o.Camera.ImageUrls.Split(';')[0]" />
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <p>
+                            <strong>Name:</strong> <span>@o.Camera.Name</span>
+                        </p>
+                        <p>
+                            <strong>Brand:</strong> <span>@o.Camera.BrandName</span>
+                            <strong>Category:</strong> <span>@o.Camera.Category</span>
+                        </p>
+                        <p>
+                            <strong>Amount:</strong> <span>@o.Amount</span>
+                        </p>
+                        <p>
+                            <strong>Total:</strong> <span>@String.Format("{0:0,0} đ", o.ProductPrice)</span>
+                        </p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

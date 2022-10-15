@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TH4_Nhom20.Data;
 
@@ -11,9 +12,10 @@ using TH4_Nhom20.Data;
 namespace TH4_Nhom20.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221015125752_Checkout")]
+    partial class Checkout
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -356,6 +358,9 @@ namespace TH4_Nhom20.Data.Migrations
                     b.Property<int>("CameraId")
                         .HasColumnType("int");
 
+                    b.Property<int>("InvoiceId")
+                        .HasColumnType("int");
+
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
 
@@ -366,7 +371,7 @@ namespace TH4_Nhom20.Data.Migrations
 
                     b.HasIndex("CameraId");
 
-                    b.HasIndex("OrderId");
+                    b.HasIndex("InvoiceId");
 
                     b.ToTable("ORDERDETAILS");
                 });
@@ -527,7 +532,7 @@ namespace TH4_Nhom20.Data.Migrations
 
                     b.HasOne("TH4_Nhom20.Models.OrderModel", "Order")
                         .WithMany()
-                        .HasForeignKey("OrderId")
+                        .HasForeignKey("InvoiceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

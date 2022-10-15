@@ -9,10 +9,10 @@ namespace TH4_Nhom20.Models
         [Key]
         public int Id { get; set; }
         [Required]
-        public int InvoiceId { get; set; }
-        [ForeignKey("InvoiceId")]
+        public int OrderId { get; set; }
+        [ForeignKey("OrderId")]
         [ValidateNever]
-        public OrderModel Invoice { get; set; }
+        public OrderModel Order { get; set; }
         public int CameraId { get; set; }
         [ForeignKey("CameraId")]
         [ValidateNever]

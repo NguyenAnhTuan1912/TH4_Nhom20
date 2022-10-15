@@ -1,0 +1,56 @@
+﻿@model OrderModel;
+
+<vc:big-banner Title="Your Orders"
+               SubTitle="Tracking your orders, where it went and when it come."></vc:big-banner>
+<div class="py-5" style="min-height: 320px">
+    <h3 class="mb-4">Tracking your orders here.</h3>
+    <table class="cart-table">
+        <thead>
+            <tr>
+                <th>SEQ</th>
+                <th>Name</th>
+                <th>Phone number</th>
+                <th>Address</th>
+                <th>Status</th>
+                <th>Checkout at</th>
+                <th>Total</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                if(ViewBag.OrderlList == null) {
+                    <tr>
+                        <td colspan="7">Bạn chưa đăng nhập, hãy đăng nhập
+                            <a href="/Identity/Account/Login">tại đây</a> để mua hà
+                        ng nhé!</td>
+                    </tr>
+                } else {
+                    int i = 0;
+                    foreach (OrderModel order in ViewBag.OrderlList)
+                    {
+                        <tr>
+                            <td>@(i + 1)</td>
+                            <td>@order.Name</td>
+                            <td>@order.PhoneNumber</td>
+                            <td>@order.Address</td>
+                            <td>@order.OrderStatus</td>
+                            <td>@order.OrderDate</td>
+                            <td>@String.Format("{0:0,0} đ", order.Subtotal)</td>
+                            <td>
+                                <a 
+                                    asp-area="User"
+                                    asp-controller="Order"
+                                    asp-action="Details"
+                                    asp-route-orderId=@order.Id
+                                    class="btn primary-btn">
+                                    Chi tiết
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                }
+            }
+        </tbody>
+    </table>
+</div>
