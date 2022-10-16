@@ -56,7 +56,7 @@
                             <div class="col-lg-6">
                                 <div class="checkout__input">
                                     <p>Phone<span>*</span></p>
-                                    <input type="text" asp-for="Order.PhoneNumber" required>
+                                    <input type="text" asp-for="Order.PhoneNumber" minlength="9" maxlength="10" required>
                                 </div>
                             </div>
                             <!--

@@ -21,6 +21,12 @@ namespace TH4_Nhom20.Models
         [Required(ErrorMessage = "Giá của máy ảnh không được để trống!")]
         [Display(Name = "Giá")]
         public string CameraPrice { get; set; }
+        [Required(ErrorMessage = "Nếu không có thì nhập vào 0")]
+        [Display(Name = "Số phần trăm được giảm")]
+        public int CameraDiscount { get; set; }
+        [Required(ErrorMessage = "Nếu không có thì nhập vào 0")]
+        [Display(Name = "Số lượng máy ảnh")]
+        public int CameraAmount { get; set; }
         [Required(ErrorMessage = "Nhập ít nhất 1 tính năng cho máy ảnh và không được để trống!")]
         [Display(Name = "Tính năng")]
         public string CameraFeatures { get; set; }

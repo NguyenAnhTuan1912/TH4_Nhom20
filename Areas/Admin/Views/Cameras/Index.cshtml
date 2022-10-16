@@ -2,57 +2,63 @@
     ViewData["Title"] = "Máy ảnh";
 }
 
+<vc:big-banner Title="Camera"
+               SubTitle="Camera management page"></vc:big-banner>
 <div class="container pb-5 pt-5">
-    <h1 class="mb-4 mt-2 .text-primary">Máy ảnh / Tất cả</h1>
-    <table id="camera-table">
-        <thead>
-            <tr>
-                <th>Số thứ tự</th>
-                <th>Tên máy</th>
-                <th>Tên hãng</th>
-                <th>Loại máy</th>
-                <th>Chức năng</th>
-            </tr>
-        </thead>
-        <tbody>
-            @{
-                int index = 1;
-                foreach (var camera in @ViewBag.Cameras)
-                {
-                    <tr>
-                        <td>@index</td>
-                        <td>@camera.Name</td>
-                        <td>@camera.BrandName</td>
-                        <td>@camera.Category</td>
-                        <td>
-                            <a asp-controller="Cameras"
-                                asp-action="Details"
-                                asp-route-id=@camera.Id
-                                class="btn btn-primary">
-                                Chi tiết
-                            </a>
-                            |
-                            <a asp-controller="Cameras"
-                                asp-action="Edit"
-                                asp-route-id=@camera.Id
-                                class="btn btn-warning">
-                                Chỉnh sửa
-                            </a>
-                            |
-                            <a
-                                data-delete-action="/Admin/Cameras/Delete/@camera.Id"
-                                data-message="Một khi bạn xoá sản phẩm này, thì mọi dữ liệu của nó sẽ biến mất vĩnh viễn!"
-                                class="btn btn-danger delete-button">
-                                Xoá
-                            </a>
+    <div>
+        <table id="camera-table">
+            <thead>
+                <tr>
+                    <th>Số thứ tự</th>
+                    <th>Tên máy</th>
+                    <th>Tên hãng</th>
+                    <th>Loại máy</th>
+                    <th>Chức năng</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int index = 1;
+                    foreach (var camera in @ViewBag.Cameras)
+                    {
+                        <tr>
+                            <td>@index</td>
+                            <td>@camera.Name</td>
+                            <td>@camera.BrandName</td>
+                            <td>@camera.Category</td>
+                            <td>
+                                <a asp-controller="Cameras"
+                           asp-action="Details"
+                           asp-route-id=@camera.Id
+                           class="btn btn-primary">
+                                    Chi tiết
+                                </a>
+                                |
+                                <a asp-controller="Cameras"
+                           asp-action="Edit"
+                           asp-route-id=@camera.Id
+                           class="btn btn-warning">
+                                    Chỉnh sửa
+                                </a>
+                                |
+                                <a data-delete-action="/Admin/Cameras/Delete/@camera.Id"
+                               data-message="Một khi bạn xoá sản phẩm này, thì mọi dữ liệu của nó sẽ biến mất vĩnh viễn!"
+                               class="btn btn-danger delete-button">
+                                    Xoá
+                                </a>
 
-                        </td>
-                    </tr>
-                    index += 1;
+                            </td>
+                        </tr>
+                        index += 1;
+                    }
                 }
-            }
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
+    <div class="py-3">
+        <a href="/Admin/Cameras/Create" class="btn btn-primary">Thêm máy ảnh mới</a>
+        <a href="/Admin" class="btn btn-light">Trở về</a>
+    </div>
 </div>
 @section Scripts {
     <script>

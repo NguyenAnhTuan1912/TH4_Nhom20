@@ -115,6 +115,14 @@ namespace TH4_Nhom20.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+                    if(User.IsInRole("Admin"))
+                    {
+
+                    }
+                    else if(User.IsInRole("User"))
+                    {
+
+                    }
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)

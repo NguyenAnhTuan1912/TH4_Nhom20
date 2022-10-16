@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Data;
 using TH4_Nhom20.Data;
 using TH4_Nhom20.Models;
 
@@ -16,6 +18,8 @@ namespace TH4_Nhom20.Controllers
             this._db = db;
             this._webHostEnvironment = webHostEnvironment;
         }
+
+        [Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
             IEnumerable<CameraModel> camera = _db.CAMERA.ToList();
@@ -59,6 +63,7 @@ namespace TH4_Nhom20.Controllers
 
         // Create
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             IEnumerable<SelectListItem> brandNames = _db.BRAND.Select(item => new SelectListItem
@@ -76,9 +81,11 @@ namespace TH4_Nhom20.Controllers
             ViewBag.CategoryNamesOfEachBrand = categories;
             return View();
         }
+
         [HttpPost]
         [DisableRequestSizeLimit, RequestFormLimits(MultipartBodyLengthLimit = int.MaxValue,
         ValueLengthLimit = int.MaxValue)]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create(CameraDetailsViewModel chiTietMayAnh)
         {
             if (ModelState.IsValid)
@@ -106,6 +113,9 @@ namespace TH4_Nhom20.Controllers
                     Image = image,
                     Name = chiTietMayAnh.CameraName,
                     Price = chiTietMayAnh.CameraPrice,
+                    Discount = chiTietMayAnh.CameraDiscount,
+                    Amount = chiTietMayAnh.CameraAmount,
+                    CreatedDate =  DateTime.Now,
                     Category = chiTietMayAnh.Category,
                     Features = chiTietMayAnh.CameraFeatures,
                     Introduction = chiTietMayAnh.CameraIntroduction,
@@ -121,6 +131,7 @@ namespace TH4_Nhom20.Controllers
         }
         // Edit
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult Edit(int id)
         {
             IEnumerable<SelectListItem> brandNames = _db.BRAND.Select(item => new SelectListItem
@@ -159,6 +170,7 @@ namespace TH4_Nhom20.Controllers
         [HttpPost]
         [DisableRequestSizeLimit, RequestFormLimits(MultipartBodyLengthLimit = int.MaxValue,
         ValueLengthLimit = int.MaxValue)]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(CameraDetailsViewModel chiTietMayAnh)
         {
             var brand = _db.BRAND.Where(o => o.Id == chiTietMayAnh.BrandId).First();
@@ -215,6 +227,8 @@ namespace TH4_Nhom20.Controllers
                 oldInformationOfCamera.Brand = brand;
                 oldInformationOfCamera.Category = chiTietMayAnh.Category;
                 oldInformationOfCamera.Price = chiTietMayAnh.CameraPrice;
+                oldInformationOfCamera.Discount = chiTietMayAnh.CameraDiscount;
+                oldInformationOfCamera.Amount = chiTietMayAnh.CameraAmount;
                 oldInformationOfCamera.Features = chiTietMayAnh.CameraFeatures;
                 oldInformationOfCamera.Introduction = chiTietMayAnh.CameraIntroduction;
                 oldInformationOfCamera.ImageUrls = (urls.Count < 1) ? oldInformationOfCamera.ImageUrls : String.Join(";", urls.ToArray());
@@ -235,6 +249,7 @@ namespace TH4_Nhom20.Controllers
 
         // Details
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult Details(int id)
         {
             var chiTietMayAnh = (from camera in _db.CAMERA
@@ -246,6 +261,8 @@ namespace TH4_Nhom20.Controllers
                                      BrandName = brand.Name,
                                      Category = camera.Category,
                                      CameraPrice = camera.Price,
+                                     CameraAmount = camera.Amount,
+                                     CameraDiscount = camera.Discount,
                                      CameraFeatures = camera.Features,
                                      CameraIntroduction = camera.Introduction,
                                      ImageUrls = camera.ImageUrls
@@ -257,6 +274,7 @@ namespace TH4_Nhom20.Controllers
 
         // Delete
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(int id)
         {
             if(id == 0)

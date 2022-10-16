@@ -130,16 +130,19 @@ Máy ảnh Nikon D5600 là mẫu máy ảnh được sản xuất nhằm khắc 
 
 6.Máy Ảnh Nikon D3500 Kit AF-P 18-55 VR
 Thông tin:
-Cảm biến CMOS định dạng DX 24.2MP,
-Bộ xử lý hình ảnh EXPEED 4,
-ISO 100-25600;
+Cảm biến:
+CMOS định dạng DX 24.2MP;
+Chip xử lý ảnh:
+Nikon EXPEED 4;
+ISO:
+100-25600;
 Chụp liên tiếp:
 5 hình/giây;
 Màn hình LCD 9":
 921000 điểm ảnh;
 Quay Full HD 1080p ở tốc độ 60 khung hình / giây;
 Hệ thống AF 11 điểm Multi-CAM 1000;
-Kết nối Bluetooth SnapBridge,
+Kết nối Bluetooth SnapBridge;
 Chế độ hướng dẫn và hiệu ứng đặc biệt;
 Trọng lượng:
 365g;
@@ -150,7 +153,7 @@ EN-EL14A Pin Li-Ion, bộ sạc nhanh MH-24, dây đeo máy ảnh AN-DC3, nắp 
 Giới thiệu chung:
 Nikon D3500 thuộc phân khúc Entry-level, thay thế cho chiếc D3400 và được cho là chiếc máy ảnh nhỏ gọn cũng như có giao diện thân thiện với người dùng hơn nhiều dòng máy từ trước đến nay của Nikon. Ngoại hình Nikon D3500 không có nhiều khác biệt so với đàn anh tiền nhiệm, nhưng Nikon D3500 lại có kích thước mỏng hơn người tiền nhiệm D3400 tới 5.5mm. D3500 cũng được Nikon khẳng định chỉ nặng 365 gam, ít hơn 30 gam so với Nikon D3400 vốn nặng 395 gam.
  
-7.Nikon D5100 Kit - Nikon
+7.Nikon D5100 Len AF-S DX Nikkor 18-55mm 1:3.5-5.6G VG
 Cảm biến ảnh Nikon DX CMOS 16.2 Megapixels
 
 Bộ xử lý ảnh:
@@ -173,7 +176,7 @@ may anh Nikon D5100 Máy ảnh Nikon D5100 Thiết kế
 Với kích thước 128 x 97 x 79 mm, trọng lượng 510g (chưa gồm phụ kiện), Nikon D5100 có thiết kế nhỏ nhẹ hơn 10% so với đàn anh của mình là D5000.danh gia Nikon D5100 
 Nikon D5100 có kích thước 128 x 97 x 79 mm, trọng lượng 510g (chưa gồm phụ kiện).Nikon D5100 được trang bị tay cầm dầy, dài và đầy đặn được bọc bởi một lớp cao su theo "truyền thống" của các dòng máy Nikon, tạo cho người dùng cảm giác chắc tay khi cầm nắm. man hinh Nikon D5100 Nổi bật với màn hình có khả năng xoay, lật, nghiêng Điểm nổi bật trong chi tiết thiết kế của Nikon D5100 là màn hình LCD kích thước 3.0 inch, độ phân giải ấn tượng 921.000 điểm ảnh có thể xoay, lật, nghiêng rất linh hoạt.Với thiết kế màn hình như vậy, Nikon D5100 giảm khá nhiều nút điều chỉnh trên thân máy so với D5000. Vị trí các nút điều khiển thay đổi hoàn toàn nhưng vẫn giúp người dùng thuận tiện hơn, không cần phải rời mắt khỏi kính ngắm cũng có thể điều chỉnh các thông số cần thiết.su dung Nikon D5100 Nóc máy với đèn Flash built-in, bánh xe chọn chế độ chụp A, P, S, M… và phím bật tắt Live-ViewNóc máy có thiết kế tương tự như các máy DSLR của Nikon trước đây với đèn Flash built-in, bánh xe chọn chế độ chụp A, P, S, M… và chế độ gtxoay tùy chọn chế độ ngắm chụp trực tiếp Live-View một cách dễ dàng, linh hoạt.
 
-8.Sony A6000 + Kit 16-50mm
+8. Sony A6000 Kit E 3.5-5.6/PZ 16-50mm OSS
 Thông tin chung:
 Cảm biến:
 CMOS APS-C Exmor APS HD 24.3MP;

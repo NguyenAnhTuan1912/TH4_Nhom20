@@ -4,6 +4,8 @@
 	string[] imageUrls = ViewBag.ChiTiet.ImageUrls.Split(";");
 }
 
+<vc:big-banner Title="Edit"
+               SubTitle="Edit information of camera"></vc:big-banner>
 <div class="container">
 	<h1>@ViewData["Title"]</h1>
 	<h3>Sửa thông tin máy</h3>
@@ -20,6 +22,18 @@
 			<input asp-for="CameraPrice" type="text" class="form-control" value=@ViewBag.ChiTiet.CameraPrice />
 			<span asp-validation-for="CameraPrice" class="text-danger"></span>
 		</article>
+		<div class="row">
+			<article class="form__input-container col-lg-6">
+				<label asp-for="CameraAmount">Số lượng</label>
+				<input asp-for="CameraAmount" type="number" min="0" max="1000" value="0" class="form-control" />
+				<span asp-validation-for="CameraAmount" class="text-danger"></span>
+			</article>
+			<article class="form__input-container col-lg-6">
+				<label asp-for="CameraDiscount">Giảm ? %</label>
+				<input asp-for="CameraDiscount" type="number" min="0" max="100" value="0" class="form-control" />
+				<span asp-validation-for="CameraDiscount" class="text-danger"></span>
+			</article>
+		</div>
 		<article class="form__input-container">
 			<label asp-for="CameraFeatures">Tính năng của máy</label>
 			@(Html.Raw("<textarea id=\"CameraFeatures\" name=\"CameraFeatures\" class=\"description-field\">"))@ViewBag.ChiTiet.CameraFeatures@(Html.Raw("</textarea>"))
@@ -44,7 +58,9 @@
 		<div class="images-block">
             @foreach (string url in imageUrls) {
                 if(url.Equals("")) continue;
-                <img src="/@url" alt="an image of @ViewBag.ChiTiet.CameraName" />
+				<div class="image-block">
+					<img src="/@url" alt="an image of @ViewBag.ChiTiet.CameraName" />
+				</div>
             }
 			<input asp-for="OldImageUrls" type="hidden" value=@ViewBag.ChiTiet.ImageUrls />
         </div>
@@ -54,9 +70,10 @@
 			<button type="button" class="btn btn-outline-secondary" id="js-addNewInputFileTagButton">Thêm ảnh</button>
 		</div>
 		<button type="submit" class="btn btn-primary">Chỉnh sửa</button>
+		<a href="/Admin/Cameras" class="btn btn-light">Trở về</a>
 	</form>
 </div>
-<partial name="~/Views/Shared/_ValidationScriptsPartial.cshtml" />
+<script src="~/js/addInputFileTag.js"></script>
 @section Scripts {
 	<script>
 		document.getElementById('BrandId').value = @ViewBag.ChiTiet.BrandId;

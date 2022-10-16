@@ -56,16 +56,18 @@
                         <div class="product__details__quantity">
                             <div class="pro-qty">
                                 <input 
-                                    type="number" value="1"
+                                    type="number"
                                     asp-for="Amount"
-                                    min="1" value="@(ViewBag.Amount == null ? 1 : ViewBag.Amount)"
+                                    min="1" value="@(ViewBag.Cart.Amount == null || ViewBag.Cart.Amount == 0 ? 1 : ViewBag.Cart.Amount)"
+                                    max="@ViewBag.Cart.Camera.Amount"
                                     onKeyDown="return false">
                             </div>
                         </div>
                         <button type="submit" class="primary-btn form-control">ADD TO CARD</button>
                         <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
                         <ul>
-                            <li><b>Availability</b> <span>In Stock</span></li>
+                            <li><b>Amount</b> <span>@ViewBag.Cart.Camera.Amount</span></li>
+                            <li><b>Availability</b> <span>@(ViewBag.Cart.Camera.Amount == 0 ? "Out of stock" : "In stock")</span></li>
                             <li><b>Shipping</b> <span>01 day shipping. <samp>Free pickup today</samp></span></li>
                             <li><b>Weight</b> <span>0.5 kg</span></li>
                         </ul>

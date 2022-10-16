@@ -27,7 +27,7 @@ SELECT * FROM AspNetUserRoles
 SELECT * FROM ORDERDETAILS
 SELECT * FROM CART
 SELECT * FROM [ORDER]
-SELECT * FROM ORDERDETAILS
+DELETE FROM IMAGE
 
 -- Xem tất chi tiết tất cả các thể loại
 SELECT BRAND.Id, BRAND.Name, CAMERA.Description, BRAND.DateCreated FROM BRAND
@@ -36,7 +36,8 @@ INNER JOIN CAMERA ON CAMERA.CategoryId = BRAND.Id
 -- MỚI: Reset ID tự động về 1
 DECLARE @name as varchar(30) = 'IMAGE'
 PRINT @name
-TRUNCATE TABLE CAMERA DBCC CHECKIDENT (@name, RESEED, 1)
+TRUNCATE TABLE IMAGE DBCC CHECKIDENT (IMAGE, RESEED, 1)
+
 
 -- Sau khi USE PHIM thì insert dữ liệu, lúc đó mới có dữ liệu để mà in ra màn hình.
 -- Insert một số dữ liệu.

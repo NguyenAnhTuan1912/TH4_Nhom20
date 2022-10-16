@@ -1,0 +1,95 @@
+﻿@{
+    ViewData["Title"] = "Đơn hàng";
+}
+
+@model OrderModel;
+
+<vc:big-banner Title="Orders Management"
+               SubTitle="Check and update user's order"></vc:big-banner>
+
+<div class="container pb-5 pt-5">
+    <div>
+        <table id="order-table">
+            <thead>
+                <tr>
+                    <th>SEQ</th>
+                    <th>Name</th>
+                    <th>Phone number</th>
+                    <th>Address</th>
+                    <th>Status</th>
+                    <th>Checkout at</th>
+                    <th>Total</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int index = 1;
+                    foreach (var order in @ViewBag.Orders)
+                    {
+                            <tr>
+                                <td>@(index)</td>
+                                <td>@order.Name</td>
+                                <td>@order.PhoneNumber</td>
+                                <td>@order.Address</td>
+                                <td>
+                                <select>
+                                    @foreach(string item in ViewBag.StatusListItem)
+                                {
+                                    if(order.OrderStatus.Equals(item)) {
+                                                    <option value="@item" selected>@item</option>
+                                    } else {
+                                                    <option value="@item">@item</option>
+                                    }
+                                }
+                                </select>
+                                </td>
+                                <td>@order.OrderDate</td>
+                                <td>@String.Format("{0:0,0} đ", order.Subtotal)</td>
+                                <td>
+                                    <a 
+                                        class="btn btn-primary update-status"
+                                        data-orderId="@order.Id"
+                                    >Cập nhật</a>
+                                </td>
+                            </tr>
+                        index += 1;
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="py-3">
+        <a href="/Admin" class="btn btn-light">Trở về</a>
+    </div>
+</div>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#order-table').DataTable();
+            $(".update-status").on("click", e => {
+                swal({
+                    title: "Cập nhật",
+                    text: "Đơn hàng này sẽ được cập nhật lại.",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true
+                }).then(value => {
+                    if(value) {
+                        const { target } = e;
+                        const closestTr = target.closest("tr");
+                        const orderId = target.getAttribute("data-orderId");
+                        const select = closestTr.querySelector("select");
+                        const parameter = `?orderId=${orderId}&status=${select.value}`;
+                        const url = `/Admin/Orders/Update/${parameter}`;
+                        $.ajax({
+                            url: `${url}`,
+                            type: 'POST'
+                        }).done(() => { });
+                    }
+                    else return;
+                });
+            })
+        });
+    </script>
+}

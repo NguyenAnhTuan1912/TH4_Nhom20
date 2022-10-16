@@ -112,14 +112,19 @@ td, th {
 	flex-direction: row;
 	justify-content: space-between;
 	width: 820px;
-	height: 300px;
+	height: fit-content;
 	margin: 15px 0;
 }
 
-	.images-block img {
-		width: 400px;
-		height: 300px;
-	}
+.images-block .image-block {
+	position: relative;
+	width: 400px;
+	height: fit-content;
+}
+
+.images-block .image-block img {
+	width: 400px;
+}
 
 ul li {
 	list-style-position: inside;
@@ -455,6 +460,9 @@ ol {
 	}
 }
 
+.information-image img {
+	width: 120px;
+}
 /*---------------------
   Header
 -----------------------*/
@@ -1437,10 +1445,6 @@ input[type=number]::-webkit-outer-spin-button {
 .latest-product__item__pic {
 	float: left;
 	margin-right: 26px;
-}
-
-.latest-product__item__pic img {
-	height: 110px;
 	width: 110px;
 }
 
@@ -1728,6 +1732,8 @@ input[type=number]::-webkit-outer-spin-button {
 	height: 270px;
 	position: relative;
 	overflow: hidden;
+	background-position: center;
+	background-size: 220px;
 }
 
 .product__discount__item__pic .product__discount__percent {

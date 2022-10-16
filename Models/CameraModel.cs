@@ -18,6 +18,14 @@ namespace TH4_Nhom20.Models
         public string Category { get; set; }
         [Required]
         public string Price { get; set; }
+        [NotMapped]
+        public double DiscoutedPrice { get; set; }
+        [Required]
+        public int Discount { get; set; }
+        [Required]
+        public int Amount { get; set; }
+        [Required]
+        public DateTime CreatedDate { get; set; }
         [Required]
         public string Features { get; set; }
         [Required]

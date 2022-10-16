@@ -4,21 +4,27 @@
     string[] imageUrls = ViewBag.ChiTiet.ImageUrls.Split(";");
 }
 
+<vc:big-banner Title="Camera details"
+               SubTitle="View detailed information of camera"></vc:big-banner>
 <div class="container pb-5 pt-5">
-    <h1 class="mb-4 mt-2 .text-primary">Camera > @ViewBag.ChiTiet.BrandName > @ViewBag.ChiTiet.Category > Details</h1>
+    <p class="mb-4 mt-2 .text-primary">Camera > @ViewBag.ChiTiet.BrandName > @ViewBag.ChiTiet.Category > Details</p>
     <div class="details-content">
         <h2>Tên thể loại: @ViewBag.ChiTiet.CameraName</h2>
         <div class="images-block">
             @foreach (string url in imageUrls) {
                 if(url.Equals("")) continue;
-                <img src="/@url" alt="an image of @ViewBag.ChiTiet.CameraName" />
+                <div class="image-block">
+                    <img src="/@url" alt="an image of @ViewBag.ChiTiet.CameraName" />
+                </div>
             }
         </div>
         <p>
             <span><strong>Hãng:&nbsp;&nbsp;</strong>@ViewBag.ChiTiet.BrandName</span>
             <span><strong>Loại:&nbsp;&nbsp;</strong>@ViewBag.ChiTiet.Category</span>
         </p>
-        <h3><strong>Giá:&nbsp;&nbsp;</strong>@ViewBag.ChiTiet.CameraPrice</h3>
+        <h3><strong>Giá:&nbsp;&nbsp;</strong>@String.Format("{0:0,0} đ", int.Parse(ViewBag.ChiTiet.CameraPrice))</h3>
+        <p><strong>Số lượng:&nbsp;&nbsp;</strong>@ViewBag.ChiTiet.CameraAmount</p>
+        <p><strong>Giảm giá:&nbsp;&nbsp;</strong>@(ViewBag.ChiTiet.CameraDiscount == 0 ? "Không" : String.Format("{0}%", ViewBag.ChiTiet.CameraDiscount))</p>
         <ul>
             @foreach(string feature in features)
             {

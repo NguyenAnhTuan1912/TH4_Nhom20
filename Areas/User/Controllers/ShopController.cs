@@ -20,6 +20,13 @@ namespace TH4_Nhom20.Controllers
 
         public IActionResult Index()
         {
+            IEnumerable<CameraModel> cameras = _db.CAMERA.ToList();
+            foreach(CameraModel camera in cameras)
+            {
+                camera.DiscoutedPrice = (uint.Parse(camera.Price) * (100 - camera.Discount)) / 100;
+            }
+            ViewBag.Cameras = cameras;
+            ViewBag.AmountOfCamera = cameras.Count();
             return View();
         }
 
@@ -46,7 +53,7 @@ namespace TH4_Nhom20.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles="User")]
         public IActionResult Details(CartModel cart)
         {
             var identity = (ClaimsIdentity)User.Identity;
@@ -56,6 +63,9 @@ namespace TH4_Nhom20.Controllers
                 c.CameraId == cart.CameraId
                 && c.UserId == cart.UserId
             );
+            CameraModel cameraDb = _db.CAMERA.FirstOrDefault(c =>
+                c.Id == cart.CameraId
+            );
             if(cartDb == null)
             {
                 _db.CART.Add(cart);
@@ -63,6 +73,7 @@ namespace TH4_Nhom20.Controllers
             {
                 cartDb.Amount += cart.Amount;
             }
+            cameraDb.Amount -= cart.Amount;
             _db.SaveChanges();
             return RedirectToAction("Cart");
         }

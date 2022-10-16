@@ -19,6 +19,10 @@ namespace TH4_Nhom20.Controllers
 
         public IActionResult Index()
         {
+            if (User.IsInRole("Admin"))
+            {
+                return RedirectToAction("Index", "Home", new { area = "Admin" });
+            }
             IEnumerable<CameraModel> cameras = _db.CAMERA.ToList();
             ViewBag.Cameras = cameras;
             ViewBag.AmountOfCamera = cameras.Count();
@@ -27,6 +31,10 @@ namespace TH4_Nhom20.Controllers
 
         public IActionResult Privacy()
         {
+            if (User.IsInRole("Admin"))
+            {
+                return RedirectToAction("Index", "Home", new { area = "Admin" });
+            }
             return View();
         }
 

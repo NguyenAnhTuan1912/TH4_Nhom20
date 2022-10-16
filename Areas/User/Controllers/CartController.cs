@@ -18,7 +18,7 @@ namespace TH4_Nhom20.Areas.User.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = "User")]
         public IActionResult Index()
         {
             var identity = (ClaimsIdentity)User.Identity;
@@ -41,7 +41,7 @@ namespace TH4_Nhom20.Areas.User.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "User")]
         public IActionResult Index(int[] amount)
         {
             var identity = (ClaimsIdentity)User.Identity;
@@ -63,7 +63,7 @@ namespace TH4_Nhom20.Areas.User.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "User")]
         public IActionResult Add(CartModel cart)
         {
             var identity = (ClaimsIdentity)User.Identity;
@@ -86,7 +86,7 @@ namespace TH4_Nhom20.Areas.User.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "User")]
         public IActionResult Delete(int cameraId)
         {
             var identity = (ClaimsIdentity)User.Identity;
@@ -133,7 +133,7 @@ namespace TH4_Nhom20.Areas.User.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "User")]
         [ValidateAntiForgeryToken]
         public IActionResult Checkout(CartViewModel cart)
         {
@@ -149,6 +149,7 @@ namespace TH4_Nhom20.Areas.User.Controllers
             {
                 c.ProductPrice = int.Parse(c.Camera.Price) * c.Amount;
                 cart.Order.Subtotal += c.ProductPrice;
+                c.Camera.Amount -= c.Amount;
             }
             _db.ORDER.Add(cart.Order);
             _db.SaveChanges();

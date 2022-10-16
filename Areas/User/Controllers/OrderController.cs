@@ -30,7 +30,7 @@ namespace TH4_Nhom20.Areas.User.Controllers
             return View();
         }
 
-        [Authorize]
+        [Authorize(Roles="User")]
         public IActionResult Details(int orderId)
         {
             var identity = (ClaimsIdentity)User.Identity;

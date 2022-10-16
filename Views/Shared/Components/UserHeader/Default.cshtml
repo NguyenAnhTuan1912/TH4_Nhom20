@@ -21,7 +21,7 @@
             <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
             <li><a asp-action="Shop"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
         </ul>
-        <div class="header__cart__price">item(s): <span>@(ViewBag.Subtotal == null ? "0 đ" : String.Format("{0:0,0} đ", ViewBag.Subtotal))</span></div>
+        <div class="header__cart__price">item(s): <span>@(ViewBag.Subtotal == null || ViewBag.Subtotal == 0 ? "0 đ" : String.Format("{0:0,0} đ", ViewBag.Subtotal))</span></div>
     </div>
     <div class="humberger__menu__widget">
         <div class="header__top__right__language">
@@ -149,7 +149,7 @@
                                 }
                                 <div class="dd-footer">
                                     <div class="cart-subtotal">
-                                        <p><strong>Total: </strong>@(ViewBag.Subtotal == 0 ? "0 đ" : String.Format("{0:0,0} đ", ViewBag.Subtotal))</p>
+                                        <p><strong>Total: </strong>@(ViewBag.Subtotal == null || ViewBag.Subtotal == 0 ? "0 đ" : String.Format("{0:0,0} đ", ViewBag.Subtotal))</p>
                                     </div>
                                     <div class="dd-buttons d-flex flex-row align-items-center justify-content-end">
                                         <a href="/User/Cart" class="primary-btn">View Cart</a>
@@ -159,7 +159,7 @@
                             </div>
                         </li>
                     </ul>
-                    <div class="header__cart__price">item(s): <span>@(ViewBag.Subtotal == 0 ? "0 đ" : String.Format("{0:0,0} đ", ViewBag.Subtotal))</span></div>
+                    <div class="header__cart__price">item(s): <span>@(ViewBag.Subtotal == null || ViewBag.Subtotal == 0 ? "0 đ" : String.Format("{0:0,0} đ", ViewBag.Subtotal))</span></div>
                 </div>
             </div>
         </div>
