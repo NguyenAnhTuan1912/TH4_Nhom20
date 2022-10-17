@@ -49,3 +49,4 @@
   <li>Chi ứng dụng thành 2 Area, một cho admin và một cho user.</li>
   <li>User được phép xem các mặt hàng và chi tiết mặt hàng. Còn Admin vẫn là các chức năng này (Admin coi như hoàn thành).</li>
 </ol>
+# UPDATE: Bài này sẽ thành bài Cuối kì
