@@ -165,7 +165,14 @@ namespace TH4_Nhom20.Areas.User.Controllers
             }
             _db.CART.RemoveRange(cart.CartList);
             _db.SaveChanges();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Successful", "Cart");
+        }
+
+        [Authorize(Roles="User")]
+        [Route("/User/Cart/Checkout/Successful")]
+        public IActionResult Successful()
+        {
+            return View();
         }
     }
 }

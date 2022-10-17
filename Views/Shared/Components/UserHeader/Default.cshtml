@@ -6,7 +6,6 @@
     string isCheckoutShowing = currentActionName.Equals("Checkout") ? "active" : "";
     string isOrderShowing = currentControllerName.Equals("Order")
     || currentControllerName.Equals("Order") && currentActionName.Equals("Details") ? "active" : "";
-    string isContactShowing = currentControllerName.Equals("Contact") ? "active" : "";
 }
 
 @model CartModel;
@@ -43,7 +42,6 @@
             <li><a asp-area="User" asp-controller="Shop" asp-action="">Shop</a></li>
             <li><a asp-area="User" asp-controller="Cart" asp-action="Checkout">Checkout</a></li>
             <li><a asp-area="User" asp-controller="Order" asp-action="">Your Orders</a></li>
-            <li><a asp-area="User" asp-controller="Contact" asp-action="">Contact</a></li>
         </ul>
     </nav>
     <div id="mobile-menu-wrap"></div>
@@ -111,28 +109,31 @@
                         <li class=@isShopShowing><a asp-area="User" asp-controller="Shop" asp-action="">Shop</a></li>
                         <li class=@isCheckoutShowing><a asp-area="User" asp-controller="Cart" asp-action="Checkout">Checkout</a></li>
                         <li class=@isOrderShowing><a asp-area="User" asp-controller="Order" asp-action="">Your Orders</a></li>
-                        <li class=@isContactShowing><a asp-area="User" asp-controller="Contact" asp-action="">Contact</a></li>
                     </ul>
                 </nav>
             </div>
             <div class="col-lg-3">
                 <div class="header__cart">
                     <ul>
-                        <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                        <li><a href="#"><i class="fa fa-heart"></i> <span class="noti-amount" id="amountOfLikedProduct">0</span></a></li>
                         <li class="dropdown">
-                            <a asp-area="User" asp-controller="Cart" asp-action=""><i class="fa fa-shopping-cart"></i> <span>@(ViewBag.Carts == null ? 0 : ViewBag.Carts.Count)</span></a>
-                            <div class="dropdown-menu dropdown-menu-right">
+                            <a href="#" role="button" id="dropdownMenuClickable" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">
+                                <i class="fa fa-shopping-bag"></i> 
+                                <span class="noti-amount" id="amountOfProductInCart">@(ViewBag.Carts == null ? 0 : ViewBag.Carts.Count)</span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuClickable">
                                 <div class="dd-title d-flex align-items-center justify-content-center">
                                     <p>Preview Cart</p>
                                 </div>
+                                <p class="empty-cart" id="cartAmountItemMessage">@(ViewBag.AmountOfItemInCart == 0 ? "Hiện tại giỏ hàng đang rỗng." : "")</p>
                                 @if (ViewBag.Carts == null)
                                 {
-                                    <p class="unsignedin-user">Đăng nhập <a href="/Identity/Account/Login">tại đây</a> để thêm sản phẩm vào giỏ hàng</p>
-                                } else {
+                                    <p class="empty-cart">Đăng nhập <a href="/Identity/Account/Login">tại đây</a> để thêm sản phẩm vào giỏ hàng</p>
+                                } else if(ViewBag.AmountOfItemInCart>  0) {
                                     @foreach (CartModel item in ViewBag.Carts)
                                     {
-                                        <div class="item d-flex flex-row align-items-center justify-content-between p-2">
-                                            <a href="User/Shop/Details/?cameraId=@item.Camera.Id">
+                                        <div class="cart-item d-flex flex-row align-items-center justify-content-between" data-cameraid="@item.CameraId">
+                                            <a href="/User/Shop/Details/?cameraId=@item.Camera.Id">
                                                 <div class="d-flex flex-row align-items-center">
                                                     <div class="cart-item__info">
                                                         <p>@item.Camera.Name</p>
@@ -143,13 +144,20 @@
                                                     </div>
                                                 </div>
                                             </a>
-                                            <button class="btn"><span class="icon_close"></span></button>
+                                            <a class="delete-button"
+                                       data-cameraid="@item.CameraId"
+                                                data-delete-action="/User/Cart/Delete/?cameraId=@item.CameraId"
+                                                data-message="Bạn muốn bỏ sản phẩm này ra khỏi giỏ hàng chứ?">
+                                                <span class="material-symbols-outlined">
+                                                    close
+                                                </span>
+                                            </a>
                                         </div>
                                     }
                                 }
                                 <div class="dd-footer">
                                     <div class="cart-subtotal">
-                                        <p><strong>Total: </strong>@(ViewBag.Subtotal == null || ViewBag.Subtotal == 0 ? "0 đ" : String.Format("{0:0,0} đ", ViewBag.Subtotal))</p>
+                                        <p><strong>Total: </strong><span id="cartTotal">@(ViewBag.Subtotal == null || ViewBag.Subtotal == 0 ? "0 đ" : String.Format("{0:0,0} đ", ViewBag.Subtotal))</span></p>
                                     </div>
                                     <div class="dd-buttons d-flex flex-row align-items-center justify-content-end">
                                         <a href="/User/Cart" class="primary-btn">View Cart</a>

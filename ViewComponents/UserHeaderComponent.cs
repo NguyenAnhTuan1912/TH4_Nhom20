@@ -34,11 +34,13 @@ namespace TH4_Nhom20.ViewComponents
             double Subtotal = 0;
             foreach(CartModel c in cart.CartList)
             {
+                if (c.ProductPrice != 0) c.ProductPrice = 0;
                 c.ProductPrice += c.Amount * int.Parse(c.Camera.Price);
                 Subtotal += c.ProductPrice;
             }
             ViewBag.Carts = cart.CartList;
             ViewBag.Subtotal = Subtotal;
+            ViewBag.AmountOfItemInCart = cart.CartList.Count();
             return View("Default");
         }
     }

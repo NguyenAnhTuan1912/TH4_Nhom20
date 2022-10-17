@@ -13,7 +13,7 @@ const showDeleteWarningBox = (function () {
         swal({
             title: "Bạn có chắc không?",
             text: currentTarget.getAttribute('data-message'),
-            icon: "danger",
+            icon: "warning",
             buttons: true,
             dangerMode: true
         }).then(value => {

@@ -18,10 +18,8 @@
                 </div>
             }
         </div>
-        <p>
-            <span><strong>Hãng:&nbsp;&nbsp;</strong>@ViewBag.ChiTiet.BrandName</span>
-            <span><strong>Loại:&nbsp;&nbsp;</strong>@ViewBag.ChiTiet.Category</span>
-        </p>
+        <p><strong>Hãng:&nbsp;&nbsp;</strong>@ViewBag.ChiTiet.BrandName</p>
+        <p><strong>Loại:&nbsp;&nbsp;</strong>@ViewBag.ChiTiet.Category</p>
         <h3><strong>Giá:&nbsp;&nbsp;</strong>@String.Format("{0:0,0} đ", int.Parse(ViewBag.ChiTiet.CameraPrice))</h3>
         <p><strong>Số lượng:&nbsp;&nbsp;</strong>@ViewBag.ChiTiet.CameraAmount</p>
         <p><strong>Giảm giá:&nbsp;&nbsp;</strong>@(ViewBag.ChiTiet.CameraDiscount == 0 ? "Không" : String.Format("{0}%", ViewBag.ChiTiet.CameraDiscount))</p>

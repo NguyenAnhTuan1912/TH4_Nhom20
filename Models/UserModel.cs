@@ -9,6 +9,7 @@ namespace TH4_Nhom20.Models
         public string Name { get; set; }
         public string? Address { get; set; }
         public string? Role { get; set; }
+        public string LikedProduct { get; set; }
     }
 }
 

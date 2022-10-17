@@ -1,4 +1,4 @@
-﻿@model CartModel;
+﻿ @model CartModel;
 @{
     ViewData["Title"] = "Cart";
 }
@@ -26,7 +26,7 @@
                             <tbody>
                                 @foreach (CartModel item in ViewBag.Cart.CartList)
                                 {
-                                    <tr>
+                                    <tr class="cart-item" data-cameraid="@item.CameraId">
                                         <td class="shoping__cart__item">
                                             <img src="~/@item.Camera.ImageUrls.Split(';')[0]" alt="">
                                             <h5>@item.Camera.Name</h5>
@@ -46,11 +46,13 @@
                                         </td>
                                         <td class="shoping__cart__item__close">
                                             <a class="delete-button"
+                                                data-cameraid="@item.CameraId"
                                                 data-delete-action="/User/Cart/Delete/?cameraId=@item.CameraId"
                                                 data-message="Bạn muốn bỏ sản phẩm này ra khỏi giỏ hàng chứ?">
-                                                <span class="icon_close"></span>
+                                                <span class="material-symbols-outlined">
+                                                    close
+                                                </span>
                                             </a>
-                                            
                                         </td>
                                     </tr>
                                 }

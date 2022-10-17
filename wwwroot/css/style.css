@@ -382,7 +382,6 @@ ol {
 	text-transform: uppercase;
 	font-weight: 700;
 	background: #7fad39;
-	letter-spacing: 2px;
 }
 
 .site-btn {
@@ -770,19 +769,22 @@ ol {
 	position: relative;
 }
 
-.dropdown:hover .dropdown-menu {
-	display: block;
-	margin-top: 0;
+.delete-button {
+	cursor: pointer;
+}
+
+.cart-item .delete-button {
+	width: 24px;
+	height: 24px;
 }
 
 .dropdown-menu {
-	width: 480px;
 	min-width: 300px;
 	padding-top: 0;
 	box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
-.dropdown-menu .unsignedin-user {
+.dropdown-menu .empty-cart {
 	padding: 0 20px;
 }
 
@@ -837,6 +839,10 @@ input[type=number]::-webkit-outer-spin-button {
 	-webkit-appearance: none;
 }
 
+.cart-item {
+	padding: 8px 20px;
+}
+
 .cart-item__info {
 	width: 250px;
 	max-width: 280px;
@@ -860,7 +866,7 @@ input[type=number]::-webkit-outer-spin-button {
 	color: #1c1c1c;
 }
 
-.header__cart ul li a span {
+.header__cart ul li a span.noti-amount {
 	height: 13px;
 	width: 13px;
 	background: #7fad39;
@@ -872,7 +878,7 @@ input[type=number]::-webkit-outer-spin-button {
 	display: inline-block;
 	border-radius: 50%;
 	position: absolute;
-	top: 0;
+	top: -5%;
 	right: -12px;
 }
 
@@ -1736,7 +1742,8 @@ input[type=number]::-webkit-outer-spin-button {
 	background-size: 220px;
 }
 
-.product__discount__item__pic .product__discount__percent {
+.product__discount__item__pic .product__discount__percent,
+.product__item__pic .product__discount__percent {
 	height: 45px;
 	width: 45px;
 	background: #dd2222;
@@ -1988,6 +1995,7 @@ input[type=number]::-webkit-outer-spin-button {
 	height: 270px;
 	position: relative;
 	overflow: hidden;
+	background-position: center;
 	background-size: 180px;
 }
 
@@ -2055,6 +2063,12 @@ input[type=number]::-webkit-outer-spin-button {
 .product__item__text {
 	text-align: center;
 	padding-top: 15px;
+}
+
+.product__item__text .product__discount__item__text span {
+	display: block;
+	font-weight: 400;
+	text-decoration: line-through;
 }
 
 .product__item__text h6 {
@@ -2267,11 +2281,6 @@ input[type=number]::-webkit-outer-spin-button {
 	cursor: pointer;
 	display: inline-block;
 	user-select: none;
-}
-
-.shoping__cart__item__close a {
-	display: block;
-	height: fit-content;
 }
 
 .product__details__tab {
