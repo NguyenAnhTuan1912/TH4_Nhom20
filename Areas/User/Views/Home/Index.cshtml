@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Home";
     int amountOfCameras = ViewBag.AmountOfCamera;
+    int amountOfLikedProductIds = ViewBag.LikedProductIds == null ? 0 : ViewBag.LikedProductIds.Count;
 }
 <!-- Banner Section Begin -->
 <div class="container big-banner-container">
@@ -50,22 +51,40 @@
             </div>
         </div>
         <div class="row featured__filter">
-            @foreach (var item in ViewBag.Cameras)
-            {
-                <div class="col-lg-3 col-md-4 col-sm-6 mix @item.BrandName">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="@item.ImageUrls.Split(';')[0]">
-                            <ul class="featured__item__pic__hover">
-                                <li><a class="like-btn" data-cameraid="@item.Id" data-liked="false"><i class="fa fa-heart"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="featured__item__text">
-                            <h6><a href="/User/Shop/Details/?cameraId=@item.Id">@item.Name</a></h6>
-                            <h5>@String.Format("{0:0,0} đ", int.Parse(item.Price))</h5>
+            @{
+                foreach (CameraModel item in ViewBag.Cameras)
+                {
+                    <div class="col-lg-3 col-md-4 col-sm-6 mix @item.BrandName">
+                        <div class="featured__item">
+                            <div class="featured__item__pic set-bg" data-setbg="@item.ImageUrls.Split(';')[0]">
+                                <ul class="featured__item__pic__hover">
+                                    <li>
+                                        @if(ViewBag.LikedProductIds != null && ViewBag.LikedProductIds.Contains(item.Id.ToString()))
+                                        {
+                                            <a class="like-btn active"
+                                                data-cameraid="@item.Id"
+                                                data-liked="true">
+                                                <i class="fa fa-heart"></i>
+                                            </a>
+                                        } else {
+                                            <a class="like-btn"
+                                                data-cameraid="@item.Id"
+                                                data-liked="false">
+                                                <i class="fa fa-heart"></i>
+                                            </a>
+                                        }
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="featured__item__text">
+                                <h6><a href="/User/Shop/Details/?cameraId=@item.Id">@item.Name</a></h6>
+                                <h5>@String.Format("{0:0,0} đ", int.Parse(item.Price))</h5>
+                            </div>
                         </div>
                     </div>
-                </div>
+                }
             }
+            
         </div>
     </div>
 </section>

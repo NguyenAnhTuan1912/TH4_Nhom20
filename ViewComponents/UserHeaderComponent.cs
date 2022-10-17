@@ -24,6 +24,11 @@ namespace TH4_Nhom20.ViewComponents
             {
                 return View("Default");
             }
+            List<string> likedProductIds = _db.USER
+                    .Where(user => user.Id == claim.Value)
+                    .First().LikedProduct
+                    .Split(';')
+                    .ToList();
             CartViewModel cart = new CartViewModel()
             {
                 CartList = _db.CART
@@ -40,6 +45,7 @@ namespace TH4_Nhom20.ViewComponents
             }
             ViewBag.Carts = cart.CartList;
             ViewBag.Subtotal = Subtotal;
+            ViewBag.LikedProductIds = likedProductIds;
             ViewBag.AmountOfItemInCart = cart.CartList.Count();
             return View("Default");
         }

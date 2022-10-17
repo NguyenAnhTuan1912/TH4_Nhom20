@@ -6,6 +6,7 @@
     string isCheckoutShowing = currentActionName.Equals("Checkout") ? "active" : "";
     string isOrderShowing = currentControllerName.Equals("Order")
     || currentControllerName.Equals("Order") && currentActionName.Equals("Details") ? "active" : "";
+    int amountOfLikedProductIds = ViewBag.LikedProductIds == null ? 0 : ViewBag.LikedProductIds.Count;
 }
 
 @model CartModel;
@@ -115,7 +116,12 @@
             <div class="col-lg-3">
                 <div class="header__cart">
                     <ul>
-                        <li><a href="#"><i class="fa fa-heart"></i> <span class="noti-amount" id="amountOfLikedProduct">0</span></a></li>
+                        <li>
+                            <a href="/User/Shop/Liked">
+                                <i class="fa fa-heart"></i> 
+                                <span class="noti-amount" id="amountOfLikedProductIds">@amountOfLikedProductIds</span>
+                            </a>
+                        </li>
                         <li class="dropdown">
                             <a href="#" role="button" id="dropdownMenuClickable" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">
                                 <i class="fa fa-shopping-bag"></i> 

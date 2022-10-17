@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Security.Claims;
 using TH4_Nhom20.Data;
 using TH4_Nhom20.Models;
 
@@ -19,10 +20,17 @@ namespace TH4_Nhom20.Controllers
 
         public IActionResult Index()
         {
-            if (User.IsInRole("Admin"))
+            var identity = (ClaimsIdentity)User.Identity;
+            var claim = identity.FindFirst(ClaimTypes.NameIdentifier);
+            if(claim != null)
             {
-                return RedirectToAction("Index", "Home", new { area = "Admin" });
-            }
+                List<string> likedProductIds = _db.USER
+                    .Where(user => user.Id == claim.Value)
+                    .First().LikedProduct
+                    .Split(';')
+                    .ToList();
+                ViewBag.LikedProductIds = likedProductIds;
+            };
             IEnumerable<CameraModel> cameras = _db.CAMERA.ToList();
             ViewBag.Cameras = cameras;
             ViewBag.AmountOfCamera = cameras.Count();
@@ -31,10 +39,6 @@ namespace TH4_Nhom20.Controllers
 
         public IActionResult Privacy()
         {
-            if (User.IsInRole("Admin"))
-            {
-                return RedirectToAction("Index", "Home", new { area = "Admin" });
-            }
             return View();
         }
 

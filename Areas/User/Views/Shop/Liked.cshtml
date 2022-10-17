@@ -1,0 +1,23 @@
+﻿@model CartModel;
+@{
+    ViewData["Title"] = "Liked camera";
+}
+
+<vc:big-banner Title="Liked Camera"
+               SubTitle="All of your liked cameras"></vc:big-banner>
+<div class="container py-5">
+    <h3 class="p-0">Newest</h3>
+    <div class="py-3">
+        @if(ViewBag.LikedProducts != null) {
+            @foreach (CameraModel item in ViewBag.LikedProducts)
+            {
+                <div class="liked-product-container">
+                    You liked <a class="text-dark text-decoration-none" href="/User/Shop/Details/?cameraId=@item.Id"><strong>@item.Name</strong></a>
+                </div>
+            }
+        }    </div>
+    <div class="py-3">
+        <a href="/" class="btn primary-btn">Quay lại trang chủ</a>
+        <a href="/User/Shop" class="btn primary-btn">Tiếp tục mua hàng</a>
+    </div>
+</div>

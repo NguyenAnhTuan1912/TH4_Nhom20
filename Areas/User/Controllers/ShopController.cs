@@ -52,6 +52,25 @@ namespace TH4_Nhom20.Controllers
             return View();
         }
 
+        public IActionResult Liked()
+        {
+            var identity = (ClaimsIdentity)User.Identity;
+            var claim = identity.FindFirst(ClaimTypes.NameIdentifier);
+            if (claim == null)
+            {
+                return View();
+            }
+            List<string> likedProductIds = _db.USER
+                    .Where(user => user.Id == claim.Value)
+                    .First().LikedProduct
+                    .Split(';')
+                    .ToList();
+            IEnumerable<CameraModel> cameras = _db.CAMERA
+                .Where(c => likedProductIds.Contains(c.Id.ToString())).ToList();
+            ViewBag.LikedProducts = cameras;
+            return View();
+        }
+
         [HttpPost]
         [Authorize(Roles="User")]
         public IActionResult Details(CartModel cart)
