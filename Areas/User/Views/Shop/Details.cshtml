@@ -120,6 +120,38 @@
                             <div class="tab-pane active" id="tabs-3" role="tabpanel">
                                 <div class="product__details__tab__desc">
                                     <h6>Products Review</h6>
+                                    <div class="review-input-box px-3 mb-3">
+                                        <label class="container">
+                                            Review
+                                            <textarea id="inputReviewBox" data-cameraid="@ViewBag.Cart.Camera.Id"></textarea>
+                                        </label>
+                                        <div class="container d-flex justify-content-end mt-3"><button type="button" class="btn primary-btn" id="sendReviewBtn">Send review</button></div>
+                                    </div>
+                                    <div class="review-box px-3" id="reviewBox">
+                                        @foreach(ReviewModel review in ViewBag.ReviewList) {
+                                            <div class="review row mb-3" data-reviewid="@review.Id">
+                                                <div class="review-user-avatar col-lg-1"></div>
+                                                <div class="review-text col-lg-10">
+                                                    <p class="review-user-name">@review.User.Name</p>
+                                                    <p class="review-date">Lúc @review.ReviewedDate</p>
+                                                    <p class="review-text mt-2">@review.Review</p>
+                                                </div>
+                                                @if(ViewBag.UserId == review.UserId) {
+                                                    <div class="button col-lg-1">
+                                                        <a 
+                                                            style="cursor: pointer;"
+                                                            class="delete-review-button text-dark"
+                                                            data-cameraid="@ViewBag.Cart.CameraId"
+                                                            data-reviewid="@review.Id">
+                                                            <span class="material-symbols-outlined">
+                                                                close
+                                                            </span>
+                                                        </a>
+                                                    </div>
+                                                }
+                                            </div>
+                                        }
+                                    </div>
                                 </div>
                             </div>
                         </div>

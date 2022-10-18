@@ -334,34 +334,6 @@ namespace TH4_Nhom20.Data.Migrations
                     b.ToTable("CART");
                 });
 
-            modelBuilder.Entity("TH4_Nhom20.Models.CommentModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("CameraId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Comment")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CameraId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("COMMENTS");
-                });
-
             modelBuilder.Entity("TH4_Nhom20.Models.ImageModel", b =>
                 {
                     b.Property<int>("Id")
@@ -446,6 +418,37 @@ namespace TH4_Nhom20.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("ORDER");
+                });
+
+            modelBuilder.Entity("TH4_Nhom20.Models.ReviewModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("CameraId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Review")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ReviewedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CameraId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("REVIEWS");
                 });
 
             modelBuilder.Entity("TH4_Nhom20.Models.UserModel", b =>
@@ -558,25 +561,6 @@ namespace TH4_Nhom20.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("TH4_Nhom20.Models.CommentModel", b =>
-                {
-                    b.HasOne("TH4_Nhom20.Models.CameraModel", "Camera")
-                        .WithMany()
-                        .HasForeignKey("CameraId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TH4_Nhom20.Models.UserModel", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Camera");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("TH4_Nhom20.Models.OrderDetailsModel", b =>
                 {
                     b.HasOne("TH4_Nhom20.Models.CameraModel", "Camera")
@@ -603,6 +587,25 @@ namespace TH4_Nhom20.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("TH4_Nhom20.Models.ReviewModel", b =>
+                {
+                    b.HasOne("TH4_Nhom20.Models.CameraModel", "Camera")
+                        .WithMany()
+                        .HasForeignKey("CameraId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TH4_Nhom20.Models.UserModel", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Camera");
 
                     b.Navigation("User");
                 });

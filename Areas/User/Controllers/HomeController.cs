@@ -22,17 +22,23 @@ namespace TH4_Nhom20.Controllers
         {
             var identity = (ClaimsIdentity)User.Identity;
             var claim = identity.FindFirst(ClaimTypes.NameIdentifier);
-            if(claim != null)
+            List<string> likedProductIds = new List<string>();
+            if (claim != null)
             {
-                List<string> likedProductIds = _db.USER
+                UserModel user = _db.USER
                     .Where(user => user.Id == claim.Value)
-                    .First().LikedProduct
-                    .Split(';')
-                    .ToList();
-                ViewBag.LikedProductIds = likedProductIds;
+                    .First();
+                if (user.LikedProduct == null)
+                {
+                    user.LikedProduct = "";
+                }
+                likedProductIds = user.LikedProduct
+                .Split(';')
+                .ToList();
             };
             IEnumerable<CameraModel> cameras = _db.CAMERA.ToList();
             ViewBag.Cameras = cameras;
+            ViewBag.LikedProductIds = likedProductIds;
             ViewBag.AmountOfCamera = cameras.Count();
             return View();
         }

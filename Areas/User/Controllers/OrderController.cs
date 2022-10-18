@@ -27,6 +27,7 @@ namespace TH4_Nhom20.Areas.User.Controllers
             }
             IEnumerable<OrderModel> orderlList = _db.ORDER.Include("User").ToList();
             ViewBag.OrderlList = orderlList;
+            ViewBag.UserId = claim.Value;
             return View();
         }
 

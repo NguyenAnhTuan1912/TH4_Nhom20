@@ -17,6 +17,6 @@ namespace TH4_Nhom20.Data
         public DbSet<CartModel> CART { get; set; }
         public DbSet<OrderModel> ORDER { get; set; }
         public DbSet<OrderDetailsModel> ORDERDETAILS { get; set; }
-        public DbSet<CommentModel> COMMENTS { get; set; }
+        public DbSet<ReviewModel> REVIEWS { get; set; }
     }
 }

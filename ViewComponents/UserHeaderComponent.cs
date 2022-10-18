@@ -20,15 +20,22 @@ namespace TH4_Nhom20.ViewComponents
         {
             var identity = (ClaimsIdentity)User.Identity;
             var claim = identity.FindFirst(ClaimTypes.NameIdentifier);
+            List<string> likedProductIds = new List<string>();
             if (claim == null)
             {
+                ViewBag.LikedProductIds = new List<string>() { "" };
                 return View("Default");
             }
-            List<string> likedProductIds = _db.USER
-                    .Where(user => user.Id == claim.Value)
-                    .First().LikedProduct
-                    .Split(';')
-                    .ToList();
+            UserModel user = _db.USER
+                .Where(user => user.Id == claim.Value)
+                .First();
+            if (user.LikedProduct == null)
+            {
+                user.LikedProduct = "";
+            }
+            likedProductIds = user.LikedProduct
+            .Split(';')
+            .ToList();
             CartViewModel cart = new CartViewModel()
             {
                 CartList = _db.CART

@@ -32,6 +32,13 @@ namespace TH4_Nhom20.Controllers
 
         public IActionResult Details(int cameraId)
         {
+            var identity = (ClaimsIdentity)User.Identity;
+            var claim = identity.FindFirst(ClaimTypes.NameIdentifier);
+            UserModel user = new UserModel();
+            if(claim != null)
+            {
+                user = _db.USER.Where(u => u.Id == claim.Value).First();
+            }
             CartModel cart = new CartModel
             {
                 CameraId = cameraId,
@@ -41,6 +48,7 @@ namespace TH4_Nhom20.Controllers
                 .First(),
                 Amount = 1
             };
+            IEnumerable<ReviewModel> reviewList = _db.REVIEWS.Include("User").Where(c => c.CameraId == cameraId).ToList();
             IEnumerable<CameraModel> cameras = _db.CAMERA
                 .Where(camera => 
                         camera.Category == cart.Camera.Category
@@ -48,7 +56,9 @@ namespace TH4_Nhom20.Controllers
                         && camera.Id != cameraId
             );
             ViewBag.relatedCamera = cameras;
+            ViewBag.ReviewList = reviewList;
             ViewBag.Cart = cart;
+            ViewBag.UserId = user.Id;
             return View();
         }
 
@@ -56,17 +66,24 @@ namespace TH4_Nhom20.Controllers
         {
             var identity = (ClaimsIdentity)User.Identity;
             var claim = identity.FindFirst(ClaimTypes.NameIdentifier);
+            List<string> likedProductIds = new List<string>();
             if (claim == null)
             {
                 return View();
             }
-            List<string> likedProductIds = _db.USER
-                    .Where(user => user.Id == claim.Value)
-                    .First().LikedProduct
-                    .Split(';')
-                    .ToList();
+            UserModel user = _db.USER
+                .Where(user => user.Id == claim.Value)
+                .First();
+            if (user.LikedProduct == null)
+            {
+                user.LikedProduct = "";
+            }
+            likedProductIds = user.LikedProduct
+            .Split(';')
+            .ToList();
             IEnumerable<CameraModel> cameras = _db.CAMERA
                 .Where(c => likedProductIds.Contains(c.Id.ToString())).ToList();
+            ViewBag.LikedProductIds = likedProductIds;
             ViewBag.LikedProducts = cameras;
             return View();
         }

@@ -29,25 +29,28 @@
                     int i = 0;
                     foreach (OrderModel order in ViewBag.OrderlList)
                     {
-                        <tr>
-                            <td>@(i + 1)</td>
-                            <td>@order.Name</td>
-                            <td>@order.PhoneNumber</td>
-                            <td>@order.Address</td>
-                            <td>@order.OrderStatus</td>
-                            <td>@order.OrderDate</td>
-                            <td>@String.Format("{0:0,0} đ", order.Subtotal)</td>
-                            <td>
-                                <a 
-                                    asp-area="User"
-                                    asp-controller="Order"
-                                    asp-action="Details"
-                                    asp-route-orderId=@order.Id
-                                    class="btn primary-btn">
-                                    Chi tiết
-                                </a>
-                            </td>
-                        </tr>
+                        if (ViewBag.UserId == order.UserId) {
+                            <tr>
+                                <td>@(i + 1)</td>
+                                <td>@order.Name</td>
+                                <td>@order.PhoneNumber</td>
+                                <td>@order.Address</td>
+                                <td>@order.OrderStatus</td>
+                                <td>@order.OrderDate</td>
+                                <td>@String.Format("{0:0,0} đ", order.Subtotal)</td>
+                                <td>
+                                    <a 
+                                        asp-area="User"
+                                        asp-controller="Order"
+                                        asp-action="Details"
+                                        asp-route-orderId=@order.Id
+                                        class="btn primary-btn">
+                                        Chi tiết
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                        i += 1;
                     }
                 }
             }

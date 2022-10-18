@@ -27,6 +27,7 @@ SELECT * FROM AspNetUserRoles
 SELECT * FROM ORDERDETAILS
 SELECT * FROM CART
 SELECT * FROM [ORDER]
+SELECT * FROM AspNetUsers
 DELETE FROM IMAGE
 
 -- Xem tất chi tiết tất cả các thể loại

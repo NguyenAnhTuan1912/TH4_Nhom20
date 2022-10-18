@@ -6,7 +6,7 @@
     string isCheckoutShowing = currentActionName.Equals("Checkout") ? "active" : "";
     string isOrderShowing = currentControllerName.Equals("Order")
     || currentControllerName.Equals("Order") && currentActionName.Equals("Details") ? "active" : "";
-    int amountOfLikedProductIds = ViewBag.LikedProductIds == null ? 0 : ViewBag.LikedProductIds.Count;
+    int amountOfLikedProductIds = ViewBag.LikedProductIds == null || ViewBag.LikedProductIds[0] == "" ? 0 : ViewBag.LikedProductIds.Count;
 }
 
 @model CartModel;
